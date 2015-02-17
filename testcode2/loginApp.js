@@ -1,13 +1,22 @@
     var loginApp = angular.module('loginApp', ['ngCookies']);
-    loginApp.controller('mainController', function($scope, $location, $window, $cookieStore) {
+    loginApp.controller('mainController', function($scope, $location, $window, $cookieStore, $http) {
 
         //for handling login submit
         $scope.submitLogin = function(){
             //TODO: send request to server, set corresponding cookies
             if ($scope.userL.uname == "guest" && $scope.userL.pass == "guest"){
                 alert("login successful!");
-                $cookieStore.put('test', 'testcookie');
-                $window.location.href = "https://ix.cs.uoregon.edu/~zhuojun/connect4/connect4.html"
+
+                //send request to django server and store cookie if successful
+                $http.get('http://www.w3schools.com/website/Customers_JSON.php').
+                  success(function(data, status, headers, config) {
+                      alert(data);
+                      $cookieStore.put('test', 'testcookie');
+                      $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"connect4.html";
+                  }).
+                  error(function(data, status, headers, config) {
+                      alert(status);
+                  });
             }else{
                 alert("login failed!");
             }
