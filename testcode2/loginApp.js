@@ -1,12 +1,12 @@
-    var loginApp = angular.module('loginApp', []);
-    loginApp.controller('mainController', function($scope, $location, $window) {
+    var loginApp = angular.module('loginApp', ['ngCookies']);
+    loginApp.controller('mainController', function($scope, $location, $window, $cookieStore) {
 
         //for handling login submit
         $scope.submitLogin = function(){
-            //alert($scope.userL.uname);
             //TODO: send request to server, set corresponding cookies
             if ($scope.userL.uname == "guest" && $scope.userL.pass == "guest"){
                 alert("login successful!");
+                $cookieStore.put('test', 'testcookie');
                 $window.location.href = "https://ix.cs.uoregon.edu/~zhuojun/connect4/connect4.html"
             }else{
                 alert("login failed!");
