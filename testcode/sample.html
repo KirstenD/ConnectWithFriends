@@ -1,10 +1,75 @@
 <!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
+<html lang="en">
+  <head>
 
-</body>
+    <title>AngularJS Routing example</title>
+
+    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+		body {
+		  padding-top: 10px;
+		  background-color: #F5F5F5;
+		}
+	.nav > li {
+		float:none;
+		display:inline-block;
+		*display:inline; /* Internet Explorer 7 compatibility */
+		*zoom:1;
+		vertical-align: top;
+	}
+
+    </style>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="../../assets/js/html5shiv.js"></script>
+      <script src="../../assets/js/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body ng-app="sampleApp">
+
+    <div class="container">
+		<div class="row">
+		<div class="col-md-3">
+		   <ul class="nav">
+				<li><a href="#Login"> Login Screen </a></li>
+				<li><a href="#Home"> Home Screen </a></li>
+			</ul>
+		</div>
+		<div class="col-md-9">
+		  	<div ng-view></div>
+		</div>
+
+		</div>
+
+    </div><!-- /.container -->
+
+
+	<script type="text/ng-template" id="login.html">
+
+		<h2> Login Screen </h2>
+
+
+
+	</script>
+
+	<script type="text/ng-template" id="home.html">
+
+		<h2> Home </h2>
+		{{message}}
+
+	</script>
+    <script type="text/ng-template" id="chat.html">
+
+		<h2> chat </h2>
+		{{message}}
+
+	</script>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+	<script src="app.js"></script>
+
+  </body>
 </html>
