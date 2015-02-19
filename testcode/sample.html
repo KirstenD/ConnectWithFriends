@@ -28,14 +28,14 @@
     <![endif]-->
   </head>
 
-  <body ng-app="sampleApp">
+  <body ng-app="loginApp">
 
     <div class="container">
 		<div class="row">
 		<div class="col-md-3">
 		   <ul class="nav">
 				<li><a href="#Login"> Login Screen </a></li>
-				<li><a href="#Home"> Home Screen </a></li>
+				<li><a href="#Home"> chat Screen </a></li>
 			</ul>
 		</div>
 		<div class="col-md-9">
@@ -51,24 +51,161 @@
 
 		<h2> Login Screen </h2>
 
+         <div class="page-header"><h1>Welcome to Connect with Friends</h1></div>
 
+        <!-- form for login -->
+        <form name="loginForm" ng-submit="submitLogin()" novalidate>
+
+            <!-- login username -->
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="unameL" class="form-control" placeholder="username" ng-model="userL.uname" required>
+            </div>
+
+            <!-- login password -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="passL" class="form-control" placeholder="password" ng-model="userL.pass" required>
+            </div>
+
+            <!-- login submit button -->
+            <button type="submit" class="btn btn-primary">Sign in</button>
+
+        </form>
+        <br>
+
+        <!-- form for register -->
+        <form name="regForm" ng-submit="submitReg()" novalidate>
+
+            <!-- register username -->
+            <div class="form-group">
+                <label>New username</label>
+                <input type="text" name="unameR" class="form-control" placeholder="username" ng-model="userR.uname">
+            </div>
+
+            <!-- register password -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="passR1" class="form-control" placeholder="password" ng-model="userR.pass1">
+            </div>
+
+            <!-- register password -->
+            <div class="form-group">
+                <label>Confirm password </label>
+                <input type="password" name="passR2" class="form-control" placeholder="password" ng-model="userR.pass2">
+            </div>
+
+            <!-- register submit button -->
+            <button type="submit" class="btn btn-primary">Register</button>
+
+        </form>
+    </div><!-- col-sm-8 -->
+</div><!-- /container -->
 
 	</script>
 
 	<script type="text/ng-template" id="home.html">
 
 		<h2> Home </h2>
-		{{message}}
+		<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="mystyle.css">
+<style>
+.user_name{
+    font-size:14px;
+    font-weight: bold;
+}
+.comments-list .media{
+    border-bottom: 1px dotted #ccc;
+}
+</style>
+
+<!--
+<script src="http://code.angularjs.org/1.2.6/angular.js"></script>
+<script src="loginApp.js"></script>
+</head>
+
+apply angular app and controller to our body
+<body ng-app="loginApp" ng-controller="mainController">
+-->
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="btn-panel btn-panel-conversation">
+                <a href="" class="btn  col-lg-6 send-message-btn " role="button"><i class="fa fa-search"></i> we can do something here</a>
+                <a href="" class="btn  col-lg-6  send-message-btn pull-right" role="button">
+                    <i class="fa fa-plus"></i>online users below</a>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="conversation-wrap col-lg-3">
+
+
+            <div class="media conversation">
+                <a class="pull-left" href="#">
+                    <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVq1Vo3EklAiJsSKcQifouoa0UvdZ8fgh_rp5tnV3gkQIzb1B">
+                </a>
+                <div class="media-body">
+                    <h5 class="media-heading">Naimish Sakhpara</h5>
+                    <small>Hello</small>
+                </div>
+            </div>
+
+            <div class="media conversation">
+                <a class="pull-left" href="#">
+                    <img class="media-object" alt="64x64" style="width: 50px; height: 50px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVq1Vo3EklAiJsSKcQifouoa0UvdZ8fgh_rp5tnV3gkQIzb1B">
+                </a>
+                <div class="media-body">
+                    <h5 class="media-heading">Naimish Sakhpara</h5>
+                    <small>Hello</small>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="message-wrap col-lg-8">
+            <div class="msg-wrap">
+
+
+
+                <div class="media msg">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" alt="64x64" style="width: 32px; height: 32px;" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDVq1Vo3EklAiJsSKcQifouoa0UvdZ8fgh_rp5tnV3gkQIzb1B">
+                    </a>
+                    <div class="media-body">
+                        <small class="pull-right time"><i class="fa fa-clock-o"></i> 12:10am</small>
+                        <h5 class="media-heading">Naimish Sakhpara</h5>
+
+                        <small class="col-lg-10">Arnab Goswami: "Some people close to Congress Party and close to the government had a #secret #meeting in a farmhouse in Maharashtra in which Anna Hazare send some representatives and they had a meeting in the discussed how to go about this all fast and how eventually this will end."</small>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="send-wrap ">
+
+                <textarea class="form-control send-message" rows="3" placeholder="Write a reply..."></textarea>
+
+
+            </div>
+            <div class="btn-panel">
+                <a href="" class=" col-lg-3 btn   send-message-btn " role="button"><i class="fa fa-cloud-upload"></i> do somthing3</a>
+                <a href="" class=" col-lg-4 text-right btn   send-message-btn pull-right" role="button"><i class="fa fa-plus"></i> Send Message</a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
 
 	</script>
-    <script type="text/ng-template" id="chat.html">
 
-		<h2> chat </h2>
-		{{message}}
-
-	</script>
 
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-cookies.min.js"></script>
+    <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
 	<script src="app.js"></script>
 
   </body>
