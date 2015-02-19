@@ -14,6 +14,7 @@
 
 <script src="http://code.angularjs.org/1.2.6/angular.js"></script> 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-cookies.min.js"></script>
+<script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
 <script src="connect4App.js"></script>
 
 </head>
@@ -28,8 +29,8 @@
                     RECENT CHAT HISTORY
                 </div>
 
-                <div class="panel-body" >
-                    <ul class="media-list" style="height: 200px; overflow: auto">
+                <div class="panel-body"  >
+                    <ul class="media-list" style="height: 200px; overflow: auto" scroll-glue>
 
                         <li class="media" ng-repeat="x in names track by $index">
                         <div class="media-body">
