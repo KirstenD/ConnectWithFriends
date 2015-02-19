@@ -1,2 +1,9 @@
 # vim
 *.swp
+
+# Python
+*.pyc
+
+# Django
+*.log
+*.pot
