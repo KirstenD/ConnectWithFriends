@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- load bootstrap -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<style>
+body    { padding-top:30px; }
+</style>
+
+<!-- load angular -->
+ <script src="../../documentation/lib/angular/angular.js"></script>
+    <script src="../../documentation/lib/angular/angular-route.min.js"></script>
+
+    <script src="../../documentation/lib/angular/angular-cookies.js"></script>
+	<script src="../../documentation/lib/angular/angular.min.js"></script>
+    <script src="../../documentation/lib/angular/angular-route.js"></script>
+    <script src="../../documentation/lib/angular/angular-animate.js"></script>
+
+    <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
+<script src="../controllers/loginController.js"></script>
+<link href="../css/bootstrap.css" rel="stylesheet" />
+</head>
+
+<!-- apply angular app and controller to our body -->
+<body ng-app="mainApp.loginApp" ng-controller="loginController">
+<div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
+
+        <div class="page-header"><h1>Welcome to Connect with Friends</h1></div>
+
+        <!-- form for login -->
+        <form name="loginForm" ng-submit="submitLogin()" novalidate>
+
+            <!-- login username -->
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="unameL" class="form-control" placeholder="username" ng-model="userL.uname" required>
+            </div>
+
+            <!-- login password -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="passL" class="form-control" placeholder="password" ng-model="userL.pass" required>
+            </div>
+
+            <!-- login submit button -->
+            <button type="submit" class="btn btn-primary">Sign in</button>
+
+        </form>
+        <br>
+
+        <!-- form for register -->
+        <form name="regForm" ng-submit="submitReg()" novalidate>
+
+            <!-- register username -->
+            <div class="form-group">
+                <label>New username</label>
+                <input type="text" name="unameR" class="form-control" placeholder="username" ng-model="userR.uname">
+            </div>
+
+            <!-- register password -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="passR1" class="form-control" placeholder="password" ng-model="userR.pass1">
+            </div>
+
+            <!-- register password -->
+            <div class="form-group">
+                <label>Confirm password </label>
+                <input type="password" name="passR2" class="form-control" placeholder="password" ng-model="userR.pass2">
+            </div>
+
+            <!-- register submit button -->
+            <button type="submit" class="btn btn-primary">Register</button>
+
+        </form>
+    </div><!-- col-sm-8 -->
+</div><!-- /container -->
+</body>
+</html>
