@@ -7,11 +7,11 @@ mainApp.config(['$routeProvider',
       }).
       when('/chat', {
 	templateUrl: '../html/chat.html',
-	controller: 'chat2Controller'
+	controller: 'chatController'
       }).
       when('/logout', {
 	templateUrl: '../html/login.html',
-	controller: 'logoutController'
+	controller: 'loginController'
       }).
       otherwise({
 	redirectTo: '/Home'
@@ -21,18 +21,3 @@ mainApp.config(['$routeProvider',
 mainApp.controller("mainController",function(){});
 
 
-mainApp.controller('logoutController', function($scope ,$location, $window ) {
-$scope.logout = function(){
-$window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/login.html";
-//alert("logout");
-
-};
-});
-
-mainApp.controller('chat2Controller', function($scope ,$location, $window ) {
-$scope.chat = function(){
-$window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/chat.html";
-//alert("chatting ");
-
-};
-});
