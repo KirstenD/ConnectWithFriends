@@ -37,18 +37,23 @@
   <script src="controllers/loginController.js"></script>
   <script src="controllers/chatController.js"></script>
      <script>
-function setURL(url){
-    document.getElementById('iframe').src = url;
-}
+
 </script>
   <body ng-app="mainApp">
 
-    <div class="container">
+    <div class="container" >
 		<div class="row">
 		<div class="col-md-3">
 		   <ul class="nav">
-                <li><button type="button" onclick="setURL('html/chat.html')" > chatting </button></li>
-                <li><a href="html/login.html"> Logout </a></li>
+               <script>
+                   function setUrl(url){
+
+                   document.getElementById("iframe2").src = url
+                   }
+               </script>
+               
+                <li><a href="/html/login.html"> Logout </a></li>
+
 			</ul>
 		</div>
 		<div class="col-md-9">
@@ -59,13 +64,18 @@ function setURL(url){
 
     </div><!-- /.container -->
 
-<div>
-    
 
-<iframe id="iframe"  width ="1000" height=" 2000" />
+<div>
+    <div><li><button onclick='setUrl("html/connect4.html")'> game </button></li>
+        <li><button onclick="setUrl('html/chat.html')"/> Chatting </button></li>
+    </div>
+  <div  >
+
+<iframe id="iframe2"  width ="1000" height=" 2000" />
+
 </div>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
 	<script src="controllers/app.js"></script>
-
+ </div>
   </body>
 </html>

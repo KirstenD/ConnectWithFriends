@@ -1,4 +1,4 @@
-var mainApp = angular.module('mainApp', ['ngCookies','mainApp.loginApp','mainApp.chatApp'])
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies','mainApp.loginApp','mainApp.chatApp'])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
       when('/Home', {
@@ -18,6 +18,13 @@ mainApp.config(['$routeProvider',
       });
 }]);
 
-mainApp.controller("mainController",function(){});
+mainApp.controller("mainController",function($scope,$routeProvider){
+    $scope.chaturl = "../html/chat.html";
+    $scope.frame = "iframe";
+    $scope.setURLChat = function(){
 
+        document.getElementById($scope.frame).src =$scope.chaturl ;
+};
+
+});
 
