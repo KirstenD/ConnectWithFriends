@@ -18,7 +18,9 @@
 		*zoom:1;
 		vertical-align: top;
 	}
-
+div {
+		  padding-left: 20px;
+		  background-color: #F5F5F5;
     </style>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -27,19 +29,42 @@
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
   </head>
+ <script src="../documentation/lib/angular/angular.js"></script>
+    <script src="../documentation/lib/angular/angular-route.min.js"></script>
 
-  <body ng-app="mainApp">
+    <script src="../documentation/lib/angular/angular-cookies.js"></script>
+	<script src="../documentation/lib/angular/angular.min.js"></script>
+    <script src="../documentation/lib/angular/angular-route.js"></script>
+    <script src="../documentation/lib/angular/angular-animate.js"></script>
+  <script src="controllers/loginController.js"></script>
+  <script src="controllers/chatController.js"></script>
+	<script src="controllers/app.js"></script>
+     <script>
 
-    <div class="container">
+</script>
+  <body ng-app="mainApp" ng-controller="mainController">
+
+    <div class="container" >
 		<div class="row">
 		<div class="col-md-3">
 		   <ul class="nav">
-				<li><a href="html/chat.html"> Chatting </a></li>
-                <li><a href="html/login.html"> Logout </a></li>
+               <script>
+                   function setUrl(url){
+
+                   document.getElementById("iframe2").src = url
+                   }
+                   function setUrl2(url){
+                    alert("here");
+
+                   }
+               </script>
+
+                <li><button onclick='setUrl2("html/login.html")'>Logout</button> </li>
+
 			</ul>
 		</div>
 		<div class="col-md-9">
-		  	<div ng-view></div>
+
 		</div>
 
 		</div>
@@ -47,8 +72,16 @@
     </div><!-- /.container -->
 
 
-	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
-	<script src="controllers/app.js"></script>
+<div>
+    <div  class=container"><li><button onclick='setUrl("html/connect4.html")'> game </button></li>
+        <li><button onclick="setUrl('html/chat.html')"/> Chatting </button></li>
+    </div>
+  <div  >
 
+<iframe id="iframe2"  width ="1000" height=" 500" />
+
+</div>
+
+ </div>
   </body>
 </html>
