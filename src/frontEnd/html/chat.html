@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link href="../css/bootstrap.css" rel="stylesheet" />
 
- <script src="../../documentation/lib/angular/angular.js"></script>
-    <script src="../../documentation/lib/angular/angular-route.min.js"></script>
+ <script src="../../../documentation/lib/angular/angular.js"></script>
+    <script src="../../../documentation/lib/angular/angular-route.min.js"></script>
 
-    <script src="../../documentation/lib/angular/angular-cookies.js"></script>
-	<script src="../../documentation/lib/angular/angular.min.js"></script>
-    <script src="../../documentation/lib/angular/angular-route.js"></script>
-    <script src="../../documentation/lib/angular/angular-animate.js"></script>
+    <script src="../../../documentation/lib/angular/angular-cookies.js"></script>
+	<script src="../../../documentation/lib/angular/angular.min.js"></script>
+    <script src="../../../documentation/lib/angular/angular-route.js"></script>
+    <script src="../../../documentation/lib/angular/angular-animate.js"></script>
 
     <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
 <script src="../controllers/chatController.js"></script>
@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="panel-body"  >
-                    <ul class="media-list" style="height: 200px; overflow: auto" scroll-glue>
+                    <ul class="media-list" style="height: 300px; overflow: auto" scroll-glue>
 
                         <li class="media" ng-repeat="x in names track by $index">
                         <div class="media-body">
@@ -61,12 +61,14 @@
                 </div>
 
                 <div class="panel-footer">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Enter Message" />
-                        <span class="input-group-btn">
-                            <button class="btn btn-info" type="button">SEND</button>
-                        </span>
-                    </div>
+                    <form ng-submit="send()" novalidate>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter Message" ng-model="msg" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-info" type="submit" >SEND</button>
+                            </span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -90,8 +92,10 @@
                                 </a>
                                 <div class="media-body" >
                                     <h5>{{ x }} | User </h5>
-
-                                    <small class="text-muted">Active From 3 hours</small>
+                                    <button ng-click="addFriend(x)" type="button" class="btn btn-default btn-xs">add friend</button>
+                                    <button ng-click="chat(x)" type="button" class="btn btn-default btn-xs">chat</button>
+                                    <button ng-click="challenge(x)" type="button" class="btn btn-default btn-xs">challenge</button>
+                                    <!--small class="text-muted">Active From 3 hours</small-->
                                 </div>
                             </div>
 
