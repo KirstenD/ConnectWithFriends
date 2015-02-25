@@ -39,10 +39,12 @@ div {
   <script src="controllers/loginController.js"></script>
   <script src="controllers/chatController.js"></script>
 	<script src="controllers/app.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+
      <script>
 
 </script>
-  <body ng-app="mainApp" ng-controller="mainController">
+  <body ng-app="mainApp" ng-controller="mainController" ng-controller="chatController" ng-controller="loginController">
 
     <div class="container" >
 		<div class="row">
@@ -73,12 +75,12 @@ div {
 
 
 <div>
-    <div  class=container"><li><button onclick='setUrl("html/connect4.html")'> game </button></li>
-        <li><button onclick="setUrl('html/chat.html')"/> Chatting </button></li>
+    <div  class=container"><li><button onclick='setUrl("html/game.html")'> game </button></li>
+        <li><button onclick='setUrl("html/chat.html")'/> Chatting </button></li>
     </div>
   <div  >
 
-<iframe id="iframe2"  width ="1000" height=" 500" />
+<iframe class="hidden_element" id="iframe2"  width ="1000" height=" 500" />
 
 </div>
 

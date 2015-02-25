@@ -1,4 +1,5 @@
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies','mainApp.loginApp','mainApp.chatApp'])
+var mainApp = angular.module('mainApp', ["loginApp","chatApp", "ngRoute",'ngCookies',])
+
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
@@ -11,19 +12,22 @@ mainApp.config(['$routeProvider',
       }).
       when('/logout', {
 	templateUrl: '../html/login.html',
-	controller: 'mainApp.loginApp.loginController'
+	controller: 'loginController'
+      }).
+      when('/game', {
+	templateUrl: '../html/game.html',
+	controller: 'gameController'
       }).
       otherwise({
 	redirectTo: '/Home'
       });
 }]);
 
-mainApp.controller("mainController",function($scope,$routeProvider){
-    $scope.chaturl = "../html/chat.html";
-    $scope.frame = "iframe";
+mainApp.controller("mainController",function($scope, $location, $window, $cookieStore, $http){
+
     $scope.setURLChat = function(){
 
-        document.getElementById($scope.frame).src =$scope.chaturl ;
+        alert("here")
 };
 
 

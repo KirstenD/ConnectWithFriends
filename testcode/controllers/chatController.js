@@ -1,5 +1,5 @@
 
-var chatApp = angular.module('mainApp.chatApp', ['ngCookies']);
+var chatApp = angular.module('chatApp', ['ngCookies']);
 chatApp.controller('chatController', function($scope, $interval) {
     $scope.names=['Jani','Hege','Kai'];
     $interval(function(){
