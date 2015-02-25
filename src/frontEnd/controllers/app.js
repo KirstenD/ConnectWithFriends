@@ -18,13 +18,19 @@ mainApp.config(['$routeProvider',
       });
 }]);
 
-mainApp.controller("mainController",function($scope,$routeProvider){
+mainApp.controller("mainController",function($scope,$window){
     $scope.chaturl = "../html/chat.html";
     $scope.frame = "iframe";
     $scope.setURLChat = function(){
 
         document.getElementById($scope.frame).src =$scope.chaturl ;
-};
+    };
+    $scope.logout = function(){
+        alert("destroy token");
+        $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/login.html";
+
+    };
+
 
 
 });
