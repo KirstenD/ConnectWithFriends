@@ -1,87 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
 
-    <title>AngularJS Routing example</title>
+<title>AngularJS Routing example</title>
 
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-		body {
-		  padding-top: 10px;
-		  background-color: #F5F5F5;
-		}
-	.nav > li {
-		float:none;
-		display:inline-block;
-		*display:inline; /* Internet Explorer 7 compatibility */
-		*zoom:1;
-		vertical-align: top;
-	}
+<style>
+body {
+    padding-top: 10px;
+    background-color: #F5F5F5;
+}
+.nav > li {
+    float:none;
+    display:inline-block;
+            *display:inline; /* Internet Explorer 7 compatibility */
+            *zoom:1;
+            vertical-align: top;
+}
 div {
-		  padding-left: 20px;
-		  background-color: #F5F5F5;
-    </style>
+    padding-left: 20px;
+    background-color: #F5F5F5;
+}
+</style>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
       <script src="../../assets/js/html5shiv.js"></script>
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
-  </head>
- <script src="../documentation/lib/angular/angular.js"></script>
-    <script src="../documentation/lib/angular/angular-route.min.js"></script>
-
-    <script src="../documentation/lib/angular/angular-cookies.js"></script>
-	<script src="../documentation/lib/angular/angular.min.js"></script>
-    <script src="../documentation/lib/angular/angular-route.js"></script>
-    <script src="../documentation/lib/angular/angular-animate.js"></script>
-  <script src="controllers/loginController.js"></script>
-  <script src="controllers/chatController.js"></script>
-	<script src="controllers/app.js"></script>
-     <script>
+</head>
+<script src="../../documentation/lib/angular/angular.js"></script>
+<script src="../../documentation/lib/angular/angular-cookies.js"></script>
+<script src="../../documentation/lib/angular/angular-route.js"></script>
+<script src="../../documentation/lib/angular/angular-animate.js"></script>
+<script src="controllers/loginController.js"></script>
+<script src="controllers/chatController.js"></script>
+<script src="controllers/app.js"></script>
+<script>
 
 </script>
-  <body ng-app="mainApp" ng-controller="mainController">
+<body ng-app="mainApp" ng-controller="mainController">
 
-    <div class="container" >
-		<div class="row">
-		<div class="col-md-3">
-		   <ul class="nav">
-               <script>
-                   function setUrl(url){
+<div class="container" >
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="nav">
+                <script>
+                    function setUrl(url){
 
-                   document.getElementById("iframe2").src = url
-                   }
-                   function setUrl2(url){
-                    alert("here");
+                        document.getElementById("iframe2").src = url
+                    }
+                    function setUrl2(url){
+                        alert("here");
 
-                   }
-               </script>
+                    }
+                </script>
 
-                <li><button onclick='setUrl2("html/login.html")'>Logout</button> </li>
+                <!--li><button onclick='setUrl2("html/login.html")'>Logout</button> </li-->
+                <li><button data-ng-click='logout()'>Logout</button> </li>
 
-			</ul>
-		</div>
-		<div class="col-md-9">
+            </ul>
+        </div>
+        <div class="col-md-9">
 
-		</div>
+        </div>
 
-		</div>
+    </div>
 
-    </div><!-- /.container -->
+</div><!-- /.container -->
 
 
 <div>
-    <div  class=container"><li><button onclick='setUrl("html/connect4.html")'> game </button></li>
+    <div class=container"><li><button onclick='setUrl("html/connect4.html")'> game </button></li>
         <li><button onclick="setUrl('html/chat.html')"/> Chatting </button></li>
     </div>
-  <div  >
-
-<iframe id="iframe2"  width ="1000" height=" 500" />
-
+    <div>
+        <iframe id="iframe2"  width ="1000" height=" 500" />
+    </div>
 </div>
-
- </div>
-  </body>
+</body>
 </html>

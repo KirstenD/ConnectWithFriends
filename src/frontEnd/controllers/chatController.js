@@ -1,5 +1,5 @@
 
-var chatApp = angular.module('mainApp.chatApp', ['ngCookies']);
+var chatApp = angular.module('mainApp.chatApp', ['ngCookies','luegg.directives']);
 chatApp.controller('chatController', function($scope, $interval) {
     $scope.names=['Jani','Hege','Kai'];
     $interval(function(){
