@@ -1,4 +1,4 @@
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies','mainApp.loginApp','mainApp.chatApp'])
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies'])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
