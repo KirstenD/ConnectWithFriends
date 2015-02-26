@@ -1,5 +1,5 @@
    'use strict'
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies'])
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies',"loginApp"])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
@@ -26,9 +26,6 @@ mainApp.controller("mainController",function($scope,$window){
 
         document.getElementById($scope.frame).src =$scope.chaturl ;
     };
-    $scope.logout = function(){
-        alert("destroy token");
-        $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/login.html";
-    };
+
 });
 
