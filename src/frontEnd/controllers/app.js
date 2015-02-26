@@ -29,10 +29,6 @@ mainApp.controller("mainController",function($scope,$window){
     $scope.logout = function(){
         alert("destroy token");
         $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/login.html";
-
     };
-
-
-
 });
 
