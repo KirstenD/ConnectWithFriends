@@ -1,6 +1,5 @@
-
-   'use strict'
-    var loginApp = angular.module('mainApp.loginApp', ['ngCookies',]);
+'use strict'
+    var loginApp = angular.module('loginApp', ['ngCookies']);
     loginApp.controller('loginController', function($scope, $location, $window, $cookieStore, $http) {
 
         //for handling login submit

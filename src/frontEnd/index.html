@@ -30,17 +30,17 @@ div {
       <script src="../../assets/js/respond.min.js"></script>
     <![endif]-->
 </head>
-<script src="../../documentation/lib/angular/angular.js"></script>
-<script src="../../documentation/lib/angular/angular-cookies.js"></script>
-<script src="../../documentation/lib/angular/angular-route.js"></script>
-<script src="../../documentation/lib/angular/angular-animate.js"></script>
+<script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
+<script src="../documentation/lib/angular/angular.js"></script>
+<script src="../documentation/lib/angular/angular-cookies.js"></script>
+<script src="../documentation/lib/angular/angular-route.js"></script>
+<script src="../documentation/lib/angular/angular-animate.js"></script>
 <script src="controllers/loginController.js"></script>
 <script src="controllers/chatController.js"></script>
 <script src="controllers/app.js"></script>
-<script>
 
-</script>
-<body ng-app="mainApp" ng-controller="mainController">
+
+<body ng-app="mainApp">
 
 <div class="container" >
     <div class="row">
@@ -72,8 +72,8 @@ div {
 
 
 <div>
-    <div class=container"><li><button onclick='setUrl("html/connect4.html")'> game </button></li>
-        <li><button onclick="setUrl('html/chat.html')"/> Chatting </button></li>
+    <div class=container"><li><button onclick='setUrl("html/game.html")'> game </button></li>
+        <li><button onclick='setUrl("html/chat.html")'/> Chatting </button></li>
     </div>
     <div>
         <iframe id="iframe2"  width ="1000" height=" 500" />

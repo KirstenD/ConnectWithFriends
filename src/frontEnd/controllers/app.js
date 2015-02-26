@@ -1,4 +1,5 @@
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies'])
+   'use strict'
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies','chatApp','loginApp'])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
@@ -11,7 +12,7 @@ mainApp.config(['$routeProvider',
       }).
       when('/logout', {
 	templateUrl: '../html/login.html',
-	controller: 'mainApp.loginApp.loginController'
+	controller: 'loginController'
       }).
       otherwise({
 	redirectTo: '/Home'
