@@ -1,5 +1,5 @@
    'use strict'
-var chatApp = angular.module('chatApp', ['ngCookies','Luegg.directives']);
+var chatApp = angular.module('chatApp', ['ngCookies','luegg.directives']);
 chatApp.controller('chatController', function($scope, $interval) {
     $scope.names=['Jani','Hege','Kai'];
     $interval(function(){
