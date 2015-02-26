@@ -1,5 +1,5 @@
    'use strict'
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies','chatApp','loginApp'])
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies'])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
