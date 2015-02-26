@@ -7,7 +7,6 @@ from rest_framework.decorators import permission_classes
 from rest_framework import status
 
 
-@csrf_exempt
 @api_view(["PUT", "POST"])
 def create(request):
     username = request.data.get('username', None)
