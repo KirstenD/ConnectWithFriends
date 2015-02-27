@@ -15,7 +15,7 @@
             .success(function(data, status, headers, config) {
                 alert('login successfully!' + data.token);
                 $cookieStore.put('token', data.token);
-                $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"../../";
+                $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
             })
             .error(function(data, status, headers, config) {
                 alert( "login fail: " + data);
@@ -39,7 +39,7 @@
                 .success(function(data, status, headers, config) {
                     alert('register successfully!' + data.token);
                     $cookieStore.put('token', data.token);
-                    $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"../../";
+                    $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
                 })
                 .error(function(data, status, headers, config) {
                     if (status == 409){
@@ -52,6 +52,6 @@
         }
          $scope.logout = function(){
         alert("destroy token");
-        $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/login.html";
+        $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"../index.html";
     };
     });

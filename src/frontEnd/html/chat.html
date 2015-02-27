@@ -13,15 +13,13 @@
 <!-- BOOTSTRAP CORE STYLE CSS -->
 <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <link href="../css/bootstrap.css" rel="stylesheet" />
-    <script src="../../documentation/lib/angular/angular.js"></script>
-    <script src="../../documentation/lib/angular/angular-route.min.js"></script>
+    <script src="../documentation/lib/angular/angular.js"></script>
 
-    <script src="../../documentation/lib/angular/angular-cookies.js"></script>
-	<script src="../../documentation/lib/angular/angular.min.js"></script>
-    <script src="../../documentation/lib/angular/angular-route.js"></script>
-    <script src="../../documentation/lib/angular/angular-animate.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src="../documentation/lib/angular/angular-cookies.js"></script>
+    <script src="../documentation/lib/angular/angular-route.js"></script>
+    <script src="../documentation/lib/angular/angular-animate.js"></script>
     <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
+    <script src="http://gregpike.net/demos/angular-local-storage/src/angular-local-storage.js"></script>
     <script src="../controllers/loginController.js"></script>
     <script src="../controllers/app.js"></script>
     <script src="../controllers/chatController.js"></script>
@@ -41,17 +39,16 @@
                 <div class="panel-body"  >
                     <ul class="media-list" style="height: 300px; overflow: auto" scroll-glue>
 
-
-                        <li class="media" ng-repeat="x in names track by $index">
+                        <li class="media" ng-repeat="msg in global_msgs track by $index">
                         <div class="media-body">
                             <div class="media">
                                 <a class="pull-left" href="#">
                                     <img class="media-object img-circle " src="../images/user.png" />
                                 </a>
                                 <div class="media-body" >
-                                    Message
+                                    {{ msg.text }}
                                     <br />
-                                    <small class="text-muted"> {{ x }}| 23rd June at 5:00pm</small>
+                                    <small class="text-muted"> {{ msg.sender }}| {{msg.pub_date}}</small>
                                     <hr />
                                 </div>
                             </div>

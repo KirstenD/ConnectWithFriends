@@ -20,12 +20,11 @@ mainApp.config(['$routeProvider',
 }]);
 
 mainApp.controller("mainController",function($scope,$window){
-    $scope.chaturl = "../html/chat.html";
-    $scope.frame = "iframe";
-    $scope.setURLChat = function(){
-
-        document.getElementById($scope.frame).src =$scope.chaturl ;
-    };
+    //$scope.chaturl = "../html/chat.html";
+    //$scope.frame = "iframe";
+    //$scope.setURLChat = function(){
+    //    document.getElementById($scope.frame).src =$scope.chaturl ;
+    //};
 
 });
 

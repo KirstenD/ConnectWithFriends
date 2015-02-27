@@ -1,90 +1,77 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-
-<title>AngularJS Routing example</title>
-
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-
+<!-- load bootstrap -->
+<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <style>
-body {
-    padding-top: 10px;
-    background-color: #F5F5F5;
-}
-.nav > li {
-    float:none;
-    display:inline-block;
-            *display:inline; /* Internet Explorer 7 compatibility */
-            *zoom:1;
-            vertical-align: top;
-}
-div {
-    padding-left: 20px;
-    background-color: #F5F5F5;
-}
+body    { padding-top:30px; }
 </style>
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
+<!-- load angular -->
+    <script src="documentation/lib/angular/angular.js"></script>
 
-    <script src="../documentation/lib/angular/angular.js"></script>
-    <script src="../documentation/lib/angular/angular-route.min.js"></script>
-
-    <script src="../documentation/lib/angular/angular-cookies.js"></script>
-	<script src="../documentation/lib/angular/angular.min.js"></script>
-    <script src="../documentation/lib/angular/angular-route.js"></script>
-    <script src="../documentation/lib/angular/angular-animate.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-    <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
-<script src="controllers/loginController.js"></script>
-<script src="controllers/chatController.js"></script>
-<script src="controllers/app.js"></script>
-
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script src="documentation/lib/angular/angular-cookies.js"></script>
+    <script src="documentation/lib/angular/angular-route.js"></script>
+    <script src="documentation/lib/angular/angular-animate.js"></script>
+    <script src="controllers/loginController.js"></script>
+    <script src="controllers/app.js"></script>
+<link href="css/bootstrap.css" rel="stylesheet" />
 </head>
-<body ng-app="mainApp">
 
-<div class="container" >
-    <div class="row">
-        <div class="col-md-3">
-            <ul class="nav">
-                <script>
-                    function setUrl(url){
+<!-- apply angular app and controller to our body -->
+<body ng-app="loginApp" ng-controller="loginController">
+<div class="container">
+    <div class="col-sm-8 col-sm-offset-2">
 
-                        document.getElementById("iframe2").src = url
-                    }
-                    function setUrl2(url){
-                        alert("here");
+        <div class="page-header"><h1>Welcome to Connect with Friends</h1></div>
 
-                    }
-                </script>
-<div  ng-controller="loginController" >
-                <!--li><button onclick='setUrl2("html/login.html")'>Logout</button> </li-->
-                <li><button data-ng-click='logout()'>Logout</button> </li>
-</div>
-            </ul>
-        </div>
-        <div class="col-md-9">
+        <!-- form for login -->
+        <form name="loginForm" ng-submit="submitLogin()" novalidate>
 
-        </div>
+            <!-- login username -->
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" name="unameL" class="form-control" placeholder="username" ng-model="userL.uname" required>
+            </div>
 
-    </div>
+            <!-- login password -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="passL" class="form-control" placeholder="password" ng-model="userL.pass" required>
+            </div>
 
-</div><!-- /.container -->
+            <!-- login submit button -->
+            <button type="submit" class="btn btn-primary">Sign in</button>
 
+        </form>
+        <br>
 
-<div>
-    <li><button onclick='setUrl("html/game.html")'> game </button></li>
-    </div>
-<div ng-controller = "chatController">
-        <li><button data-ng-click='chat()'/> Chatting </button></li>
-</div>
-    <div>
-        <iframe id="iframe2"  width ="1000" height=" 500" />
-    </div>
-</div>
+        <!-- form for register -->
+        <form name="regForm" ng-submit="submitReg()" novalidate>
+
+            <!-- register username -->
+            <div class="form-group">
+                <label>New username</label>
+                <input type="text" name="unameR" class="form-control" placeholder="username" ng-model="userR.uname">
+            </div>
+
+            <!-- register password -->
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" name="passR1" class="form-control" placeholder="password" ng-model="userR.pass1">
+            </div>
+
+            <!-- register password -->
+            <div class="form-group">
+                <label>Confirm password </label>
+                <input type="password" name="passR2" class="form-control" placeholder="password" ng-model="userR.pass2">
+            </div>
+
+            <!-- register submit button -->
+            <button type="submit" class="btn btn-primary">Register</button>
+
+        </form>
+    </div><!-- col-sm-8 -->
+</div><!-- /container -->
 </body>
 </html>
