@@ -51,7 +51,8 @@
             }
         }
          $scope.logout = function(){
-        alert("destroy token");
-        $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"../index.html";
+             //$cookieStore.remove('token');
+             alert("remove cookie");
+             $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"../index.html";
     };
     });
