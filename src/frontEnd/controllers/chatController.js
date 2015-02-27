@@ -1,6 +1,6 @@
    'use strict'
 var chatApp = angular.module('chatApp', ['ngCookies','luegg.directives']);
-chatApp.controller('chatController', function($scope, $interval) {
+chatApp.controller('chatController', function($scope, $interval ,$location, $window, $cookieStore, $http) {
     $scope.names=['Jani','Hege','Kai'];
     $interval(function(){
         //alert($scope.names);
@@ -19,6 +19,10 @@ chatApp.controller('chatController', function($scope, $interval) {
     };
     $scope.send = function(){
         alert($scope.msg);
+    };
+     $scope.chat = function(){
+        alert("chating is fun");
+       document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/chat.html";
     };
 
 });
