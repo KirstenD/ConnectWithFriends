@@ -45,7 +45,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
             config
         )
         .success(function(data, status, headers, config) {
-            alert('message sent successfully!');
+            //alert('message sent successfully!');
         })
         .error(function(data, status, headers, config) {
             alert(data.detail);
