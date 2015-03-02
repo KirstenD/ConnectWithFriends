@@ -1,26 +1,6 @@
 <html>
     <head>
-        <style>
-            body{
-                margin:0;
-                padding:10;
-                width:100%;
-                background-color: #F5F5F5;
-            }
-            .nav > li {
-                float:right;
-                display:inline-block;
-                    *display:inline; /* Internet Explorer 7 compatibility */
-                    *zoom:1;
-                    vertical-align: top;
-            }
-            div {
-                padding-left: 80%;
-                background-color: #F5F5F5;
-            }
-
-
-        </style>
+        <link href="../css/main.css" rel="stylesheet" />
         <script>
             function setUrl(url){
 
@@ -30,6 +10,7 @@
                 alert("here");
 
             }
+
         </script>
 
         <script src="../documentation/lib/angular/angular.js"></script>
@@ -47,30 +28,30 @@
     </head>
     <body ng-app="mainApp">
         <table>
-            <td style="width:1000px" ng-controller="loginController">
+            <td class = "tablerow"  ng-controller="loginController">
                  Welcome to Connect With Friends, {{userR.uname}}
 
             </td>
             <td >
                  <div  ng-controller="loginController">
 
-                        <button data-ng-click='logout()' style="width:100px;height:25px;">Logout</button>
+                        <button  class=" buttons" data-ng-click='logout()' >Logout</button>
                 </div>
 
                 <div>
-                        <button onclick='setUrl("game.html")' style="width:100px;height:25px;"> Play a Game </button>
+                        <button class=" buttons" onclick='setUrl("game.html")'> Play a Game </button>
                 </div>
 
                 <div ng-controller = "chatController" >
-                        <button ng-click='chat()' style="width:100px;height:25px;"> Want to Chat </button>
+                        <button class=" buttons"  ng-click='chat()'> Want to Chat </button>
                 </div>
             </td>
         </table>
 
 
-            <iframe id= "iframe"  width="1000" height="500" style="float:left; width=90%"></iframe>
+            <iframe class="iframe1" id= "iframe"  width="1000" height="500"></iframe>
 
-            <iframe id="iframe2"  width="200" height="500" style="float:left;"></iframe>
+            <iframe class="iframe2" id="iframe2"  width="200" height="500" ></iframe>
 
     </body>
 </html>
