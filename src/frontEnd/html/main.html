@@ -1,34 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<html>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            width:100%;
+            background-color: #F5F5F5;
+        }
+        .nav > li {
+            float:right;
+            display:inline-block;
+                *display:inline; /* Internet Explorer 7 compatibility */
+                *zoom:1;
+                vertical-align: top;
+        }
+        div {
+            padding-left: 80%;
+            background-color: #F5F5F5;
+        }
 
-<title>AngularJS Routing example</title>
 
-<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    </style>
+    <script>
+        function setUrl(url){
 
-<style>
-body {
-    padding-top: 10px;
-    background-color: #F5F5F5;
-}
-.nav > li {
-    float:none;
-    display:inline-block;
-            *display:inline; /* Internet Explorer 7 compatibility */
-            *zoom:1;
-            vertical-align: top;
-}
-div {
-    padding-left: 20px;
-    background-color: #F5F5F5;
-}
-</style>
+            document.getElementById("iframe2").src = url
+        }
+        function setUrl2(url){
+            alert("here");
 
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-      <script src="../../assets/js/html5shiv.js"></script>
-      <script src="../../assets/js/respond.min.js"></script>
-    <![endif]-->
+        }
+    </script>
 
     <script src="../documentation/lib/angular/angular.js"></script>
 
@@ -40,48 +41,24 @@ div {
     <script src="../controllers/chatController.js"></script>
     <script src="../controllers/app.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
-</head>
-<body ng-app="mainApp">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <body ng-app="mainApp">
+         <div  ng-controller="loginController" >
 
-<div class="container" >
-    <div class="row">
-        <div class="col-md-3">
-            <ul class="nav">
-                <script>
-                    function setUrl(url){
+             <button data-ng-click='logout()'>Logout</button>
+         </div>
 
-                        document.getElementById("iframe2").src = url
-                    }
-                    function setUrl2(url){
-                        alert("here");
-
-                    }
-                </script>
-<div  ng-controller="loginController" >
-                <!--li><button onclick='setUrl2("html/login.html")'>Logout</button> </li-->
-                <li><button data-ng-click='logout()'>Logout</button> </li>
-</div>
-            </ul>
-        </div>
-        <div class="col-md-9">
-
-        </div>
-
-    </div>
-
-</div><!-- /.container -->
+         <div>
+             <button onclick='setUrl("game.html")'> Play a Game </button>
+         </div>
+         <div ng-controller = "chatController">
+             <button ng-click='chat()'/> Want to Chat </button>
+         </div>
 
 
-<div>
-    <li><button onclick='setUrl("game.html")'> game </button></li>
-    </div>
-<div ng-controller = "chatController">
-        <li><button ng-click='chat()'/> Chatting </button></li>
-</div>
-    <div>
-        <iframe id="iframe2"  width ="1000" height=" 500" />
-    </div>
-</div>
-</body>
+            <iframe id= "iframe"  width="1000" height="500" style="float:left; width=90%"></iframe>
+
+            <iframe id="iframe2"  width="200" height="500" style="float:left"></iframe>
+
+    </body>
 </html>

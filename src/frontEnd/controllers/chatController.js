@@ -56,7 +56,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
      $scope.chat = function(){
         //alert("chating is fun");
         //alert($cookieStore.get("token"));
-       document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
+       document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
     };
 });
 
