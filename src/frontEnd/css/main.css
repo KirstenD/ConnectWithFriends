@@ -1,0 +1,35 @@
+
+body{
+    margin:0;
+    padding:10;
+    width:100%;
+    background-color: #F5F5F5;
+}
+.nav > li {
+    float:right;
+    display:inline-block;
+        *display:inline; /* Internet Explorer 7 compatibility */
+        *zoom:1;
+        vertical-align: top;
+}
+div {
+    padding-left: 80%;
+    background-color: #F5F5F5;
+}
+.tablerow{
+    width: 1000px
+}
+
+.buttons{
+    width:100px;height:25px;
+
+}
+
+.iframe1{
+     float:left;
+     width=90%;
+}
+.iframe2{
+     float:left;
+
+}
