@@ -17,7 +17,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
             //alert('message received successfully!');
         })
         .error(function(data, status, headers, config) {
-            alert(data.detail);
+            //[-]alert(data.detail);
         });
         $scope.names[$scope.names.length] = $scope.names[$scope.names.length-1] + 'z';
     },2000);
