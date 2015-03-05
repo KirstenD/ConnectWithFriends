@@ -137,3 +137,24 @@ class DetailViewTests(APITestCase):
         response = self.client.get(reverse("accounts:detail",
                                            kwargs={"user_id": 2}))
         self.assertEqual(response.status_code, 404)
+
+
+class IndexViewTests(APITestCase):
+
+    def test_empty_user_list(self):
+        response = self.client.get(reverse("accounts:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, [])
+
+    def test_single_user(self):
+        user = create_user("Jane Doe", "password")
+        response = self.client.get(reverse("accounts:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, [UserSerializer(user).data])
+
+    def test_multiple_users(self):
+        user1 = create_user("Jane Doe", "password")
+        user2 = create_user("John Doe", "password")
+        response = self.client.get(reverse("accounts:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertItemsEqual(response.data, UserSerializer([user1, user2], many=True).data)

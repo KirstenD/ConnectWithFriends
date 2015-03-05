@@ -27,6 +27,11 @@ def create(request):
 
 
 @api_view(["GET"])
+def index(request):
+    return Response(UserSerializer(User.objects.all(), many=True).data)
+
+
+@api_view(["GET"])
 def detail(request, user_id):
     try:
         user = User.objects.get(pk=user_id)
