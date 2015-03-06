@@ -7,11 +7,14 @@ from django.contrib.auth.models import User
 from rest_framework.test import APITestCase
 from rest_framework import status
 
+from accounts.serializers import UserSerializer
+
+
 def create_user(username, password):
-    """
-    Create a user with just a username and password.
+    """ Create a user with just a username and password.
     """
     return User.objects.create_user(username, '', password)
+
 
 class LoginViewTests(APITestCase):
 
@@ -105,15 +108,53 @@ class WhoamiViewTests(APITestCase):
         response = self.client.get(reverse("accounts:whoami"))
         self.assertEqual(response.status_code, 401)
         self.assertContains(
-            response, 
+            response,
             "Authentication credentials were not provided",
             status_code=401)
 
     def test_invalid_token(self):
         username = "Jane Doe"
         password = "password"
-        user = create_user(username, password)
+        create_user(username, password)
         self.client.credentials(HTTP_AUTHORIZATION='Token ' + "notatoken")
         response = self.client.get(reverse("accounts:whoami"))
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.data["detail"], "Invalid token")
+
+
+class DetailViewTests(APITestCase):
+
+    def setUp(self):
+        self.user = create_user("Jane Doe", "password")
+
+    def test_get_user(self):
+        response = self.client.get(reverse("accounts:detail",
+                                           kwargs={"user_id": 1}))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, UserSerializer(self.user).data)
+
+    def test_invalid_id(self):
+        response = self.client.get(reverse("accounts:detail",
+                                           kwargs={"user_id": 2}))
+        self.assertEqual(response.status_code, 404)
+
+
+class IndexViewTests(APITestCase):
+
+    def test_empty_user_list(self):
+        response = self.client.get(reverse("accounts:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, [])
+
+    def test_single_user(self):
+        user = create_user("Jane Doe", "password")
+        response = self.client.get(reverse("accounts:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.data, [UserSerializer(user).data])
+
+    def test_multiple_users(self):
+        user1 = create_user("Jane Doe", "password")
+        user2 = create_user("John Doe", "password")
+        response = self.client.get(reverse("accounts:index"))
+        self.assertEqual(response.status_code, 200)
+        self.assertItemsEqual(response.data, UserSerializer([user1, user2], many=True).data)

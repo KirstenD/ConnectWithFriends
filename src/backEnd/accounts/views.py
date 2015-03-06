@@ -1,13 +1,15 @@
 from django.contrib.auth.models import User
-from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.decorators import permission_classes
 from rest_framework import status
 
+from accounts.serializers import UserSerializer
 
-@api_view(["PUT", "POST"])
+
+@api_view(["POST"])
 def create(request):
     username = request.data.get('username', None)
     password = request.data.get('password', None)
@@ -25,10 +27,20 @@ def create(request):
 
 
 @api_view(["GET"])
+def index(request):
+    return Response(UserSerializer(User.objects.all(), many=True).data)
+
+
+@api_view(["GET"])
+def detail(request, user_id):
+    try:
+        user = User.objects.get(pk=user_id)
+    except ObjectDoesNotExist:
+        return Response({}, 404)
+    return Response(UserSerializer(user).data)
+
+
+@api_view(["GET"])
 @permission_classes((IsAuthenticated, ))
 def whoami(request):
-    """
-    TODO: use serializer
-    """
-    data = {"username": request.user.username}
-    return Response(data)
+    return Response(UserSerializer(request.user).data)
