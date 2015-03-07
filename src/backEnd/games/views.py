@@ -38,7 +38,7 @@ def detail(request):
 
 @api_view(["POST"])
 @permission_classes((IsAuthenticated, ))
-def leave(request):
+def forfeit(request):
     game = Game.active_game(request.user)
     if game is None:
         return Response({"detail": "Not currently in a game"}, 400)
