@@ -27,10 +27,10 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('stalemate', models.BooleanField(default=False)),
-                ('active_player', models.ForeignKey(related_name='active_player', blank=True, to=settings.AUTH_USER_MODEL)),
                 ('player1', models.ForeignKey(related_name='player1', to=settings.AUTH_USER_MODEL)),
-                ('player2', models.ForeignKey(related_name='player2', blank=True, to=settings.AUTH_USER_MODEL)),
-                ('winner', models.ForeignKey(related_name='winner', blank=True, to=settings.AUTH_USER_MODEL)),
+                ('player2', models.ForeignKey(related_name='player2', default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('turn', models.ForeignKey(related_name='turn', default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True)),
+                ('winner', models.ForeignKey(related_name='winner', default=None, blank=True, to=settings.AUTH_USER_MODEL, null=True)),
             ],
             options={
             },

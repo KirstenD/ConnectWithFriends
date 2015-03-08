@@ -5,20 +5,20 @@ from games.models import Game
 
 class GameSerializer(ModelSerializer):
     board = SerializerMethodField()
-    is_active = SerializerMethodField()
 
     class Meta:
         model = Game
-        fields = ("active_player",
+        fields = ("turn",
                   "winner",
                   "stalemate",
                   "player1",
                   "player2",
-                  "board",
-                  "is_active")
+                  "board")
 
     def get_board(self, obj):
-        return obj.get_board
-
-    def get_is_active(self, obj):
-        return obj.is_active()
+        board = obj.get_board()
+        serialized_board = []
+        for row in board:
+            player_ids = [player.pk if player else None for player in row]
+            serialized_board.append(player_ids)
+        return serialized_board
