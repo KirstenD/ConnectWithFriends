@@ -1,5 +1,5 @@
    'use strict'
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies',"loginApp","chatApp"])
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies',"loginApp","chatApp","gameApp"])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
@@ -14,17 +14,16 @@ mainApp.config(['$routeProvider',
 	templateUrl: '../html/login.html',
 	controller: 'loginController'
       }).
+      when('/game', {
+	templateUrl: '../html/game.html',
+	controller: 'gameController'
+      }).
       otherwise({
 	redirectTo: '/Home'
       });
 }]);
 
-mainApp.controller("mainController",function($scope,$window){
-    //$scope.chaturl = "../html/chat.html";
-    //$scope.frame = "iframe";
-    //$scope.setURLChat = function(){
-    //    document.getElementById($scope.frame).src =$scope.chaturl ;
-    //};
+mainApp.controller("mainController",function($scope, $window, $cookieStore, $http){
 
 });
 
