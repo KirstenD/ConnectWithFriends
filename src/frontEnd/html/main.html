@@ -21,6 +21,7 @@
         <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
         <script src="../controllers/loginController.js"></script>
         <script src="../controllers/chatController.js"></script>
+        <script src="../controllers/gameController.js"></script>
         <script src="../controllers/app.js"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
@@ -35,11 +36,11 @@
             <td >
                  <div  ng-controller="loginController">
 
-                        <button  class=" buttons" data-ng-click='logout()' >Logout</button>
+                        <button class=" buttons" ng-click='logout()' >Logout</button>
                 </div>
 
-                <div>
-                        <button class=" buttons" onclick='setUrl("game.html")'> Play a Game </button>
+                <div ng-controller="gameController">
+                        <button class=" buttons" ng-click='game()'> Play a Game </button>
                 </div>
 
                 <div ng-controller = "chatController" >
