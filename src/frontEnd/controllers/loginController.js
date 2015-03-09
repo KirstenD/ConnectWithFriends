@@ -16,6 +16,7 @@
             .success(function(data, status, headers, config) {
                 //alert('login successfully!' + data.token);
                 $cookieStore.put('token', data.token);
+
                 $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
             })
             .error(function(data, status, headers, config) {

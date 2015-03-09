@@ -32,6 +32,7 @@ mainApp.config(['$routeProvider',
 }]);
 
 mainApp.controller("mainController",function($scope, $window, $cookieStore, $http){
+     document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
 
     $scope.xmlhttp=new XMLHttpRequest();
     $scope.xmlhttp.open("GET","http://localhost:8000/accounts/whoami",false);
