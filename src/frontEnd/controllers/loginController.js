@@ -1,3 +1,4 @@
+//TODO:remove cookie
 'use strict'
     var loginApp = angular.module('loginApp', ['ngCookies']);
     loginApp.controller('loginController', function($scope, $location, $window, $cookieStore, $http) {
@@ -13,7 +14,7 @@
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
             .success(function(data, status, headers, config) {
-                alert('login successfully!' + data.token);
+                //alert('login successfully!' + data.token);
                 $cookieStore.put('token', data.token);
                 $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
             })
@@ -37,7 +38,7 @@
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
                 })
                 .success(function(data, status, headers, config) {
-                    alert('register successfully!' + data.token);
+                    //alert('register successfully!' + data.token);
                     $cookieStore.put('token', data.token);
                     $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
                 })
@@ -52,7 +53,9 @@
         }
          $scope.logout = function(){
              //$cookieStore.remove('token');
-             alert("remove cookie");
+             //alert("remove cookie");
+             document.cookie = "token=;path=/";
+             console.log("here");
              $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"../index.html";
     };
     });

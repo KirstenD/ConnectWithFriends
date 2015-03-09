@@ -22,6 +22,7 @@
         <script src="../controllers/loginController.js"></script>
         <script src="../controllers/chatController.js"></script>
         <script src="../controllers/gameController.js"></script>
+        <script src="../controllers/friendController.js"></script>
         <script src="../controllers/app.js"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
@@ -29,8 +30,10 @@
     </head>
     <body ng-app="mainApp">
         <table>
-            <td class = "tablerow"  ng-controller="loginController">
-                 Welcome to Connect With Friends, {{userR.uname}}
+            <td class = "tablerow" ng-controller="mainController">
+
+
+                 Welcome to Connect With Friends, {{user.username}}
 
             </td>
             <td >

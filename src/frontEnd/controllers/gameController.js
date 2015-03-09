@@ -14,17 +14,16 @@ gameApp.controller('gameController', function($scope, $interval ,$location, $win
          }
          };
          $http.post('http://localhost:8000/games/start',
-             {text:$scope.msg},
+             null,
              config
              )
              .success(function(data, status, headers, config) {
                  //alert('message sent successfully!');
-                 alert(data.turn);
+                 //alert(data.turn);
              })
          .error(function(data, status, headers, config) {
-             alert(data.detail);
+             alert("error in stating or joining a game:" + status);
          });
 
     };
 });
-

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="../documentation/lib/angular/angular.js"></script>
+    <script src="../documentation/lib/angular/angular-cookies.js"></script>
+    <script src="../documentation/lib/angular/angular-route.js"></script>
+    <script src="../documentation/lib/angular/angular-animate.js"></script>
+    <script src="https://cdn.rawgit.com/Luegg/angularjs-scroll-glue/v2.0.4/src/scrollglue.js"></script>
+    <script src="http://gregpike.net/demos/angular-local-storage/src/angular-local-storage.js"></script>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+    <script src="../controllers/friendController.js"></script>
+    <link href="../css/bootstrap.css" rel="stylesheet" />
+</head>
+
+<body>
+<h3 style="padding-left: 20px;"> Friends List</h3>
+<div ng-app="friendApp" ng-controller="friendController">
+
+            <div class="lists" ng-repeat= "x in names">
+
+
+                                    <img  style="max-height:40px;" src="../images/user.png" />
+
+
+                                    <h5>{{ x.username }}  </h5>
+
+                                </div>
+                            </div>
+
+
+
+</body>

@@ -1,5 +1,5 @@
    'use strict'
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies',"loginApp","chatApp","gameApp"])
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies',"loginApp","chatApp","gameApp","friendApp"])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
@@ -18,12 +18,31 @@ mainApp.config(['$routeProvider',
 	templateUrl: '../html/game.html',
 	controller: 'gameController'
       }).
+      when("/friend",{
+      templateUrl: "../html/friend.html",
+      controller: "friendController"
+      }).
+
       otherwise({
 	redirectTo: '/Home'
       });
 }]);
 
 mainApp.controller("mainController",function($scope, $window, $cookieStore, $http){
+
+    $scope.xmlhttp=new XMLHttpRequest();
+    $scope.xmlhttp.open("GET","http://localhost:8000/accounts/whoami",false);
+    $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
+    $scope.xmlhttp.send();
+    if ($scope.xmlhttp.status == 200){
+         $scope.user  = JSON.parse($scope.xmlhttp.responseText);
+        //alert(game.id);
+
+
+    }else{
+        alert("exception in whoami:" + $scope.xmlhttp.responseText)
+    }
+
 
 });
 

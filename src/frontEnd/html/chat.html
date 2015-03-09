@@ -9,9 +9,9 @@
 <!--[if IE]>
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <![endif]-->
-<title>BOOTSTRAP CHAT EXAMPLE</title>
+<title>Global Chat</title>
 <!-- BOOTSTRAP CORE STYLE CSS -->
-<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+
 <link href="../css/bootstrap.css" rel="stylesheet" />
     <script src="../documentation/lib/angular/angular.js"></script>
 
@@ -23,9 +23,10 @@
     <script src="../controllers/loginController.js"></script>
     <script src="../controllers/app.js"></script>
     <script src="../controllers/chatController.js"></script>
-
+    <script src="../controllers/friendController.js"></script>
 </head>
-<body style="font-family:Verdana" ng-app="chatApp"  ng-controller="chatController">
+<body style="font-family:Verdana" ng-app="chatApp" ng-controller="chatController">
+<div></div>
 <div class="container">
     <div class="row " style="padding-top:40px;">
         <h3 class="text-center" >Connect with Friends Chat </h3>
@@ -88,11 +89,10 @@
                                     <img class="media-object img-circle" style="max-height:40px;" src="../images/user.png" />
                                 </a>
                                 <div class="media-body" >
-                                    <h5>{{ x }} | User </h5>
-                                    <button ng-click="addFriend(x)" type="button" class="btn btn-default btn-xs">add friend</button>
-                                    <button ng-click="chat(x)" type="button" class="btn btn-default btn-xs">chat</button>
-                                    <button ng-click="challenge(x)" type="button" class="btn btn-default btn-xs">challenge</button>
-                                    <!--small class="text-muted">Active From 3 hours</small-->
+                                    <h5>{{ x.username }} | User </h5>
+                                    <button ng-click="addFriend(x.id)" type="button" class="btn btn-default btn-xs">add friend</button>
+
+
                                 </div>
                             </div>
 

@@ -1,8 +1,11 @@
    'use strict'
 var chatApp = angular.module('chatApp', ['ngCookies','luegg.directives']);
+
 chatApp.controller('chatController', function($scope, $interval ,$location, $window, $cookieStore, $http) {
     $scope.global_msgs=[];
-    $scope.names=['Jani','Hege','Kai'];
+    $scope.friends =[];
+    $scope.names=[{"id":1,"username":"brent"},{"id":2,"username":"matt"},{"id":3,"username":"kevin"}];
+
     $interval(function(){
         var token = $cookieStore.get("token");
         var config = {headers: {
@@ -19,11 +22,28 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         .error(function(data, status, headers, config) {
             //[-]alert(data.detail);
         });
-        $scope.names[$scope.names.length] = $scope.names[$scope.names.length-1] + 'z';
+        $http.get("http://localhost:8000/accounts/index",config).success(function(data,status,headers,config){
+            $scope.name = data;
+           })
+           .error(function(data,status,header,config){
+            //alert(data.detail);
+           });
+
     },2000);
 
-     $scope.addFriend = function(name){
-        alert("add "+name);
+     $scope.addFriend = function(id){
+        $scope.xmlhttp=new XMLHttpRequest();
+        $scope.xmlhttp.open("GET","http://localhost:8000/friends/index",false);//syncronous
+        $scope.xmlhttp.setRequestHeader("id"+ id);
+        $scope.xmlhttp.send();
+        if ($scope.xmlhttp.status == 200){
+             $scope.names  = JSON.parse($scope.xmlhttp.responseText);
+             alert(names[0].id);
+
+
+        }else{
+            alert("exception in index:" + $scope.xmlhttp.responseText)
+        }
     };
     $scope.chat = function(name){
         alert("chat "+name);
@@ -57,6 +77,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         //alert("chating is fun");
         //alert($cookieStore.get("token"));
        document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
+       document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
     };
 });
 
