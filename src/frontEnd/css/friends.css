@@ -1,0 +1,14 @@
+
+body{
+    margin:30px;
+    padding:30px;
+    width:100%;
+    background-color: #e8e8e8;
+}
+.lists{
+    padding-left: 30px;
+    margin: 30px;
+
+    list-style: none;
+
+}

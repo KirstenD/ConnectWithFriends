@@ -6,16 +6,19 @@
         $scope.submitLogin = function(){
             var username =$scope.userL.uname;
             var password = $scope.userL.pass;
+
             var res = $http({
                 url: 'http://localhost:8000/accounts/login',
                 method: 'POST',
-                data: "username=" + username + "&password=" + password,
+                data: "&username=" + username + "&password=" + password,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
-            .success(function(data, status, headers, config) {
+            .success(function($scope,data, status, headers, config) {
                 alert('login successfully!' + data.token);
                 $cookieStore.put('token', data.token);
+
                 $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
+
             })
             .error(function(data, status, headers, config) {
                 alert( "login fail: " + data);
@@ -30,6 +33,7 @@
             }else{
                 var username = $scope.userR.uname;
                 var password = $scope.userR.pass1;
+
                 var res = $http({
                     url: 'http://localhost:8000/accounts/create',
                     method: 'POST',
@@ -39,6 +43,7 @@
                 .success(function(data, status, headers, config) {
                     alert('register successfully!' + data.token);
                     $cookieStore.put('token', data.token);
+
                     $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
                 })
                 .error(function(data, status, headers, config) {
@@ -50,6 +55,7 @@
                 });
             }
         }
+
          $scope.logout = function(){
              //$cookieStore.remove('token');
              alert("remove cookie");
