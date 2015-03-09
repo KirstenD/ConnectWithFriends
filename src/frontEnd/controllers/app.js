@@ -1,5 +1,5 @@
    'use strict'
-var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies',"loginApp","chatApp","gameApp","friendApp"])
+var mainApp = angular.module('mainApp', ["ngRoute",'ngCookies',"loginApp","chatApp","gameApp","friendApp","gameChatApp"])
 mainApp.config(['$routeProvider',
   function($routeProvider) {
      $routeProvider.when('/Home', {
@@ -22,7 +22,10 @@ mainApp.config(['$routeProvider',
       templateUrl: "../html/friend.html",
       controller: "friendController"
       }).
-
+      when("/gameChat",{
+      templateUrl: "../html/gameChat.html",
+      controller: "gameChatController"
+      }).
       otherwise({
 	redirectTo: '/Home'
       });

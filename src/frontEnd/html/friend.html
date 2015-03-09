@@ -15,18 +15,20 @@
 
 <body>
 <h3 style="padding-left: 20px;"> Friends List</h3>
-<div ng-app="friendApp" ng-controller="friendController">
+<div  ng-app="friendApp" ng-controller="friendController">
 
-            <div class="lists" ng-repeat= "x in names">
+            <div   ng-repeat= "x in names">
+                    <div>
+                        <img  style="padding-left:60px;max-height:40px;" src="../images/user.png" />
 
 
-                                    <img  style="max-height:40px;" src="../images/user.png" />
-
-
-                                    <h5>{{ x.username }}  </h5>
-
-                                </div>
-                            </div>
+                        <h5 style= "padding-left:60px;">{{ x.username }}  </h5>
+                    </div>
+                    <div style="margin-left:40px;margin-bottom:20px;">
+                        <button style="width:80px;height:25px" data-ng-click="deleteFriend(x.id)" > Delete Friend</button>
+                    </div>
+            </div>
+</div>
 
 
 

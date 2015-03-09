@@ -1,10 +1,10 @@
-   'use strict'
+
 var chatApp = angular.module('chatApp', ['ngCookies','luegg.directives']);
 
 chatApp.controller('chatController', function($scope, $interval ,$location, $window, $cookieStore, $http) {
     $scope.global_msgs=[];
     $scope.friends =[];
-    $scope.names=[{"id":1,"username":"brent"},{"id":2,"username":"matt"},{"id":3,"username":"kevin"}];
+  // $scope.names=[{"id":1,"username":"brent"},{"id":2,"username":"matt"},{"id":3,"username":"kevin"}];
 
     $interval(function(){
         var token = $cookieStore.get("token");
@@ -31,20 +31,23 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
 
     },2000);
 
-     $scope.addFriend = function(id){
+     $scope.addFriend = function(id1){
+
         $scope.xmlhttp=new XMLHttpRequest();
-        $scope.xmlhttp.open("GET","http://localhost:8000/friends/index",false);//syncronous
-        $scope.xmlhttp.setRequestHeader("id"+ id);
-        $scope.xmlhttp.send();
+        $scope.xmlhttp.open("POST","http://localhost:8000/friends/index",false);//syncronous
+        $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
+        $scope.xmlhttp.send("id=id1");
         if ($scope.xmlhttp.status == 200){
              $scope.names  = JSON.parse($scope.xmlhttp.responseText);
-             alert(names[0].id);
+            //alert(names[0].id);
 
 
         }else{
             alert("exception in index:" + $scope.xmlhttp.responseText)
         }
-    };
+
+      };
+
     $scope.chat = function(name){
         alert("chat "+name);
     };
@@ -76,6 +79,8 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
      $scope.chat = function(){
         //alert("chating is fun");
         //alert($cookieStore.get("token"));
+        document.getElementById("iframe").width="1000"
+        document.getElementById("iframe2").width = "200";
        document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
        document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
     };

@@ -3,7 +3,7 @@ body{
     margin:0;
     padding:10;
     width:100%;
-    background-color: #F5F5F5;
+    background-color: #e8e8e8;
 }
 .nav > li {
     float:right;
@@ -14,7 +14,7 @@ body{
 }
 div {
     padding-left: 80%;
-    background-color: #F5F5F5;
+    background-color: #e8e8e8;
 }
 .tablerow{
     width: 1000px

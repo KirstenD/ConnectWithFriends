@@ -4,9 +4,10 @@ var gameApp = angular.module('gameApp', ['ngCookies']);
 gameApp.controller('gameController', function($scope, $interval ,$location, $window, $cookieStore, $http) {
 
      $scope.game = function(){
-
+         document.getElementById("iframe").width="800"
+     document.getElementById("iframe2").width = "400";
          document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"game.html";
-
+         document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"gameChat.html";
          var token = $cookieStore.get("token");
          //alert(token);
          var config = {headers: {

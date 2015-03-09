@@ -236,14 +236,14 @@ th {
     page-break-after: avoid;
   }
   select {
-    background: #fff !important;
+    background: #e8e8e8 !important;
   }
   .navbar {
     display: none;
   }
   .table td,
   .table th {
-    background-color: #fff !important;
+    background-color: #e8e8e8 !important;
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -899,7 +899,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333;
-  background-color: #fff;
+  background-color: #e8e8e8;
 }
 input,
 button,
@@ -6200,4 +6200,4 @@ button.close {
     display: none !important;
   }
 }
-/*# sourceMappingURL=bootstrap.css.map */
+
