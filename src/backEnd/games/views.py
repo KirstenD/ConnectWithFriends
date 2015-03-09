@@ -10,16 +10,16 @@ from games.serializers import GameSerializer
 @api_view(["POST"])
 @permission_classes((IsAuthenticated, ))
 def start(request):
-    game = Game.join_or_create(request.user)
+    game = Game.new_game(request.user)
     return Response(GameSerializer(game).data)
 
 
 @api_view(["POST"])
 @permission_classes((IsAuthenticated, ))
 def move(request, column_number):
-    game = Game.active_game(request.user)
+    game = Game.current_game(request.user)
     if game is None:
-        return Response({"detail": "Not currently in a game"}, 400)
+        return Response({"detail": "Not currently in a game."}, 400)
     try:
         game.move(request.user, column_number)
     except IllegalMove as exception:
@@ -30,17 +30,17 @@ def move(request, column_number):
 @api_view(["GET"])
 @permission_classes((IsAuthenticated, ))
 def detail(request):
-    game = Game.active_game(request.user)
+    game = Game.current_game(request.user)
     if game is None:
-        return Response({"detail": "Not currently in a game"}, 400)
+        return Response({"detail": "Not currently in a game."}, 400)
     return Response(GameSerializer(game).data, 200)
 
 
 @api_view(["POST"])
 @permission_classes((IsAuthenticated, ))
 def forfeit(request):
-    game = Game.active_game(request.user)
+    game = Game.current_game(request.user)
     if game is None:
-        return Response({"detail": "Not currently in a game"}, 400)
-    game.leave(request.user)
+        return Response({"detail": "Not currently in a game."}, 400)
+    game.forfeit(request.user)
     return Response(GameSerializer(game).data, 200)

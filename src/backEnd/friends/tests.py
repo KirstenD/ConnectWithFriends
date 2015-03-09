@@ -4,6 +4,7 @@ All test cases for accounts section of app.
 
 from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.test import APITestCase
 from rest_framework import status
 
@@ -86,3 +87,39 @@ class AddViewTests(APITestCase):
         self.assertEqual(response.status_code, 400)
         self.assertEqual(response.data, {"detail": "Invalid user id."})
         self.assertEqual(Follower.objects.filter(follower=self.alice).count(), 0)
+
+
+class DeleteViewTests(APITestCase):
+
+    def setUp(self):
+        self.alice = User.objects.create_user("alice", "", "password")
+        self.bob = User.objects.create_user("bob", "", "password")
+        self.casey = User.objects.create_user("casey", "", "password")
+
+    def test_delete_friend(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + str(self.alice.auth_token))
+        self.client.post(reverse("friends:add"), {"id": self.bob.pk})
+        response = self.client.delete(reverse("friends:delete"), {"id": self.bob.pk})
+        self.assertRaises(ObjectDoesNotExist, 
+                          Follower.objects.get, 
+                          follower=self.alice, 
+                          followed=self.bob)
+        self.assertEqual(response.status_code, 204)
+
+    def test_delete_not_friends(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + str(self.alice.auth_token))
+        response = self.client.delete(reverse("friends:delete"), {"id": self.bob.pk})
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {"detail": "Specified user is not your friend."})
+
+    def test_no_id(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + str(self.alice.auth_token))
+        response = self.client.delete(reverse("friends:delete"), {})
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {"detail": "Must provide id."})
+
+    def test_id_out_of_range(self):
+        self.client.credentials(HTTP_AUTHORIZATION='Token ' + str(self.alice.auth_token))
+        response = self.client.delete(reverse("friends:delete"), {"id": 4})
+        self.assertEqual(response.status_code, 400)
+        self.assertEqual(response.data, {"detail": "Invalid user id."})

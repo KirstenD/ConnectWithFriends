@@ -12,6 +12,9 @@ from friends.models import Follower
 @api_view(["GET"])
 @permission_classes((IsAuthenticated, ))
 def index(request):
+    """
+    Get a list of all of your friends.
+    """
     user = request.user
     friends = [f.followed for f in Follower.objects.filter(follower=user)]
     serializer = UserSerializer(friends, many=True)
@@ -22,8 +25,7 @@ def index(request):
 @permission_classes((IsAuthenticated, ))
 def add(request):
     """
-    TODO: handle user adding self
-    TODO: handle no id provided
+    Add a user to your friends list.
     """
     if "id" not in request.data:
         return Response({"detail": "Must provide id."}, 400)
@@ -40,3 +42,23 @@ def add(request):
     friends = [f.followed for f in Follower.objects.filter(follower=user)]
     serializer = UserSerializer(friends, many=True)
     return Response(serializer.data)
+
+
+@api_view(["DELETE"])
+@permission_classes((IsAuthenticated, ))
+def delete(request):
+    """
+    Remove a friend from you friends list.
+    """
+    if "id" not in request.data:
+        return Response({"detail": "Must provide id."}, 400)
+    try:
+        friend = User.objects.get(pk=request.data["id"])
+    except ObjectDoesNotExist:
+        return Response({"detail": "Invalid user id."}, 400)
+    user = request.user
+    try:
+        Follower.objects.get(follower=user, followed=friend).delete()
+    except ObjectDoesNotExist:
+        return Response({"detail": "Specified user is not your friend."}, 400)
+    return Response({}, 204)
