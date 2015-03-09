@@ -52,6 +52,24 @@
             }
         }
          $scope.logout = function(){
+             var token = $cookieStore.get("token");
+             //alert(token);
+             var config = {headers: {
+                 'Authorization': 'Token '+token,
+             }
+             };
+             $http.post('http://localhost:8000/games/forfeit',
+                     null,
+                     config
+                     )
+                 .success(function(data, status, headers, config) {
+                     console.log('message sent successfully!');
+                     //alert(data.turn);
+                 })
+             .error(function(data, status, headers, config) {
+                 console.log("error in stating or joining a game:" + status);
+             });
+             
              //$cookieStore.remove('token');
              //alert("remove cookie");
              document.cookie = "token=;path=/";

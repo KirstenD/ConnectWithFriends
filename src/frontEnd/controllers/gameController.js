@@ -13,6 +13,17 @@ gameApp.controller('gameController', function($scope, $interval ,$location, $win
              'Authorization': 'Token '+token,
          }
          };
+         $http.post('http://localhost:8000/games/forfeit',
+             null,
+             config
+             )
+             .success(function(data, status, headers, config) {
+                 console.log('message sent successfully!');
+                 //alert(data.turn);
+             })
+         .error(function(data, status, headers, config) {
+             console.log("error in stating or joining a game:" + status);
+         });
          $http.post('http://localhost:8000/games/start',
              null,
              config
@@ -22,7 +33,8 @@ gameApp.controller('gameController', function($scope, $interval ,$location, $win
                  //alert(data.turn);
              })
          .error(function(data, status, headers, config) {
-             alert("error in stating or joining a game:" + status);
+             //alert("error in stating or joining a game:" + status);
+             console.log("error in stating or joining a game:" + status);
          });
 
     };
