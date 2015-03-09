@@ -37,7 +37,10 @@ class Game(models.Model):
         """
         current_game = Game.current_game(player)
         if current_game:
-            current_game.leave(player)
+            if current_game.player2 is None:
+                # If you are in a new game already, do nothing
+                return current_game
+            current_game.forfeit(player)
         available_games = Game.objects.filter(player2=None)
         if available_games.count():
             try:

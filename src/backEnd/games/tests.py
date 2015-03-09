@@ -44,6 +44,13 @@ class GameModelTests(TestCase):
         self.assertEquals(game.player1, self.alice)
         self.assertEquals(game.player2, self.bob)
 
+    def test_new_game_twice(self):
+        Game.new_game(self.alice)
+        game = Game.new_game(self.alice)
+        self.assertEquals(game.turn, None)
+        self.assertEquals(game.player1, self.alice)
+        self.assertEquals(game.player2, None)
+
     def test_join_full_game(self):
         game = Game._create_game(self.alice)
         game.join(self.bob)
