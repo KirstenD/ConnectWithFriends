@@ -1,3 +1,6 @@
+"""
+Data types and operations that represent a game of Connect 4.
+"""
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
@@ -6,6 +9,9 @@ from games.exceptions import GameFull, IllegalMove
 
 
 class Game(models.Model):
+    """
+    A game of Connect 4.
+    """
     player1 = models.ForeignKey(User, related_name="player1")
     player2 = models.ForeignKey(User, related_name="player2",
                                 blank=True, null=True, default=None)
@@ -18,7 +24,59 @@ class Game(models.Model):
     row_count = 6
 
     @classmethod
-    def create_game(cls, player):
+    def new_game(cls, player):
+        """
+        Join a game if there is one available or create one. Leaves any games
+        the player is currently in.
+
+        :arg player: The user to be placed in a new game.
+        :type player: django.contrib.auth.models.User
+
+        :returns: The game the player has joined.
+        :rtype: Game
+        """
+        current_game = Game.current_game(player)
+        if current_game:
+            current_game.leave(player)
+        available_games = Game.objects.filter(player2=None)
+        if available_games.count():
+            try:
+                game = available_games[0]
+                game.join(player)
+                return game
+            except GameFull:
+                pass
+        return cls._create_game(player)
+
+    @classmethod
+    def current_game(cls, player):
+        """
+        Return current game player is in. If the player is not currently in a
+        game, then the most recent game the player was in will be returned. If
+        the player has never been in a game, then None is returned.
+
+        :arg player: The user to find a game.
+        :type player: django.contrib.auth.models.User
+
+        :returns: The player's current game.
+        :rtype: Game or None
+        """
+        games = Game._get_games(player).order_by("-pk")
+        if not games:
+            return None
+        return games[0]
+
+    @classmethod
+    def _create_game(cls, player):
+        """
+        Create a new game with player as player1.
+
+        :arg player: The first player in the new game.
+        :type player: django.contrib.auth.models.User
+
+        :returns: The created game.
+        :rtype: Game
+        """
         game = Game.objects.create(player1=player)
         for i in range(cls.column_count):
             col = Column.objects.create(index=i, game=game)
@@ -27,55 +85,51 @@ class Game(models.Model):
         return game
 
     @classmethod
-    def join_or_create(cls, player):
-        """
-        Join a game if there is one available or create one.
-
-        Leaves any games the player is currently in.
-        """
-        current_game = Game.active_game(player)
-        if current_game:
-            current_game.leave(player)
-        available_games = Game.objects.filter(player2=None)
-        if available_games.count():
-            try:
-                available_games[0].join(player)
-                return available_games[0]
-            except GameFull:
-                pass
-        return cls.create_game(player)
-
-    @classmethod
-    def get_games(cls, player):
+    def _get_games(cls, player):
         """
         Get all games containing a specified player.
+
+        :arg player: The player to search for games containing.
+        :type player: django.contrib.auth.User
+
+        :returns: All games player has been.
+        :rtype: Game list
         """
-        games_as_player1 = cls.objects.filter(player1=player) 
+        games_as_player1 = cls.objects.filter(player1=player)
         games_as_player2 = cls.objects.filter(player2=player)
         return games_as_player1 | games_as_player2
 
-    @classmethod
-    def active_game(cls, player):
+    def forfeit(self, player):
         """
-        Return active game player is in or None if the player is not in an
-        active game.
-        """
-        games = Game.get_games(player).order_by("-pk")
-        if not games:
-            return None
-        return games[0]
+        Provided player loses this game. If the game is over, does nothing.
+        Assumes that that player is in the game.
 
-    def leave(self, player):
+        :arg player: Forfeiting player
+        :arg type: django.contrib.auth.models.User
+
+        :returns: None
+        :rtype: None
+
+        :raises AssertionError: when provided player is not in the game.
+        """
         if not self.stalemate and not self.winner:
             assert player == self.player1 or player == self.player2
             if self.player1 == player:
                 self.winner = self.player2
             else:
-                self.winner = self.player2
+                self.winner = self.player1
             self.turn = None
             self.save()
 
     def get_board(self):
+        """
+        Return a 2D array representing the board. Each position on the board is
+        either the player who has a token in that position or None for empty
+        positions.
+
+        :returns: A representation of the board.
+        :rtype: List of lists of django.contrib.auth.models.User or None
+        """
         columns = Column.objects.filter(game=self).order_by("index")
         board = [[None] * Game.column_count for _ in range(Game.row_count)]
         for column in columns:
@@ -85,10 +139,20 @@ class Game(models.Model):
 
     def move(self, player, index):
         """
+        Place a token on the board. The token will fall like in normal connect
+        4. After the move is made, the turn is updated and the board is checked
+        for game ending conditions.
+
         :arg player: Player making the move
-        :type player: User
+        :type player: django.contrib.auth.models.User
         :arg index: Index of column to place a token in
-        :type index: Int
+        :type index: int
+
+        :returns: None
+        :rtype: None
+
+        :raises IllegalMove: when it is not the turn of the player provided or
+        when the column provided does not exist.
         """
         if self.turn != player:
             raise IllegalMove("It is not your turn.")
@@ -98,7 +162,7 @@ class Game(models.Model):
             raise IllegalMove("No such column.")
         slots = Slot.objects.filter(column=column).order_by("index")
         if slots[0].player is not None:
-            raise IllegalMove("Cannot place token in full column")
+            raise IllegalMove("Cannot place token in full column.")
         i = 0
         while i < Game.row_count and slots[i].player is None:
             i += 1
@@ -113,7 +177,15 @@ class Game(models.Model):
 
     def join(self, player):
         """
-        Join a game that is missing a player.
+        Add player to this game.
+
+        :arg player: The player to add to the game.
+        :type player: django.contrib.auth.models.User
+
+        :returns: None
+        :rtype: None
+
+        :raises GameFull: if this game already has two players.
         """
         if self.player2 is not None:
             raise GameFull("There are already 2 players in this game.")
@@ -124,10 +196,14 @@ class Game(models.Model):
     def _check_board(self):
         """
         Checks the board for a winner or stalemate and updates the game state.
+
+        :returns: None
+        :rtype: None
         """
         winner = self._check_winner()
         if winner:
             self.winner = winner
+            self.turn = None
         else:
             if self._board_is_full():
                 self.stalemate = True
@@ -136,7 +212,8 @@ class Game(models.Model):
 
     def _board_is_full(self):
         """
-        Returns True if every slot in the board is occupied.
+        :returns: True if every slot in the board is occupied.
+        :rtype: bool
         """
         for column in self.get_board():
             for player in column:
@@ -233,6 +310,9 @@ class Game(models.Model):
 
 
 class Column(models.Model):
+    """
+    A column in a game.
+    """
     game = models.ForeignKey(Game)
     index = models.IntegerField()
 
@@ -241,6 +321,9 @@ class Column(models.Model):
 
 
 class Slot(models.Model):
+    """
+    A slot in a column in a game.
+    """
     column = models.ForeignKey(Column)
     index = models.IntegerField()
     player = models.ForeignKey(User, blank=True, null=True)
