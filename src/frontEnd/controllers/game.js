@@ -46,6 +46,9 @@ function whoami(){
     }
 }
 
+
+
+
 //draw board based on the json 2d array 
 function updateBoard(board , player1){
     var texture1 = "";
@@ -93,19 +96,26 @@ function getGameStatus(){
     if (xmlhttp.status == 200){
         var game = JSON.parse(xmlhttp.responseText);
         //alert(game.board[0]);
-        game.board[4][0] = 1;
-        game.board[0][5] = 2;
-        updateBoard(game.board,whoami()) ;
-        
+        //game.board[4][0] = 1;
+        //game.board[0][5] = 2;
+        updateBoard(game.board,game.player1) ;
+        updateStatus(game.stalemate,game.turn,game.winner);
+        if (game.winner != null){//TODO: may or may not need it
+            //alert(game.winner);
+        }
     }else{
-        alert(xmlhttp.responseText)
+        if (xmlhttp.status == 500){
+            //seems to be too fast for server to load sth
+        }else{
+            alert(xmlhttp.responseText);
+        }
     }
+
     //alert(xmlhttp.responseText);
 }
 
 //whoami()
 
-setInterval(getGameStatus, 3000);
 
 //transfer position in 3D world into array indexes
 function posToArrayIndex(pos){
@@ -154,47 +164,12 @@ function onDocumentMouseClick( event ) {
         xmlhttp.send();
         if (xmlhttp.status == 200){
             var game = JSON.parse(xmlhttp.responseText);
-            alert(game.turn);
             
         }else{
-            alert("response error in mouseclick:" + xmlhttp.status);
-            //alert(xmlhttp.responseText)
+            alert("It is not your turn, please wait!");
         }
     }
-
-    //if (typeof(index[0]) != "undefined" && typeof(index[1]) != "undefined"){
-    //    //creating object based on this 
-    //    var geometry2 = new THREE.CircleGeometry(circleR, 35);
-    //    var material2 = new THREE.MeshBasicMaterial( { color: 0xffffff } );
-    //    material2.map    = THREE.ImageUtils.loadTexture('../images/BlackToken.png')
-    //    var gameToken2 = new THREE.Mesh( geometry2, material2 );
-    //    //alert(geometry2.id);
-    //    gameToken2.name = "t" + index[0] + index[1];
-    //    gameToken2.position.x = colCenterCoords[index[1]];
-    //    gameToken2.position.y = rowCenterCoords[index[0]];
-    //    scene.add( gameToken2 );
-
-    //}else{
-    //    alert(index[0]+" "+index[1]);
-    //}
-
-
-    //alert(scene.getObjectByName("aa"));
-
-    //scene.getObjectByName("aa").translateY(-0.1);
-//scene.traverse (function (object)
-//{
-//        if (object.name === 'aa'){
-//            object.position.x = 1;
-//            //while  (object.position.y > -(boundaryY/2.0 - circleR)){
-//                //object.translateY(-0.1);
-//            //}
-//        }
-//            // do what you want with it.
-//});
-
 }
-
 
 //for background image. i.e. the game board
 var bg = new THREE.Mesh(
@@ -222,6 +197,8 @@ var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
 document.body.appendChild( renderer.domElement );
 
+
+//
 //var geometry = new THREE.CircleGeometry(circleR, 35);
 //var material = new THREE.MeshBasicMaterial( { color: 0xffffff } );
 //material.map    = THREE.ImageUtils.loadTexture('../images/RedToken.png')
@@ -255,3 +232,4 @@ var render = function () {
 };
 render();
 getGameStatus();
+setInterval(getGameStatus, 2000);
