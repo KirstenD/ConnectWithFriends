@@ -35,16 +35,16 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         }
 
     },2000);
-
+     
      $scope.addFriend = function(id1){
-
+/*
         $scope.xmlhttp=new XMLHttpRequest();
-        $scope.xmlhttp.open("POST",HOST+"friends/add",false);//syncronous
+        $scope.xmlhttp.open("POST",HOST+"friends/add",true);//syncronous
         $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
         $scope.xmlhttp.send("id=id1");
         if ($scope.xmlhttp.status == 200){
              $scope.friends  = JSON.parse($scope.xmlhttp.responseText);
-            //alert(names[0].id);
+
 
 
         }else{
@@ -52,7 +52,25 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         }
 
       };
-
+*/
+    var token = $cookieStore.get("token");
+         //alert(token);
+         var config = {headers: {
+             'Authorization': 'Token '+token,
+         }
+         };
+         $http.post(HOST+'friends/add',
+            {"id": id1},
+             config
+             )
+             .success(function(data, status, headers, config) {
+                 console.log('message sent successfully!');
+                 //alert(data.turn);
+             })
+         .error(function(data, status, headers, config) {
+             console.log("error in stating or joining a game:" + status);
+         });
+         };
     $scope.chat = function(name){
         alert("chat "+name);
     };
