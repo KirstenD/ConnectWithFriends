@@ -39,7 +39,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
      $scope.addFriend = function(id1){
 
         $scope.xmlhttp=new XMLHttpRequest();
-        $scope.xmlhttp.open("POST",HOST+"friends/index",false);//syncronous
+        $scope.xmlhttp.open("POST",HOST+"friends/add",false);//syncronous
         $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
         $scope.xmlhttp.send("id=id1");
         if ($scope.xmlhttp.status == 200){
