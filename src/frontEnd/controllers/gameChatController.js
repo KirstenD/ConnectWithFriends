@@ -13,7 +13,7 @@ chatApp.controller('gameChatController', function($scope, $interval ,$location, 
         }
         };
 
-        $http.get('http://localhost:8000/chat/game/index' , config)
+        $http.get(HOST+'chat/game/index' , config)
         .success(function(data, status, headers, config) {
             $scope.global_msgs = data;
             //alert(angular.toJson(data));
@@ -22,7 +22,7 @@ chatApp.controller('gameChatController', function($scope, $interval ,$location, 
         .error(function(data, status, headers, config) {
             //[-]alert(data.detail);
         });
-        $http.get("http://localhost:8000/accounts/index",config).success(function(data,status,headers,config){
+        $http.get(HOST + "accounts/index",config).success(function(data,status,headers,config){
             $scope.name = data;
            })
            .error(function(data,status,header,config){
@@ -41,7 +41,7 @@ chatApp.controller('gameChatController', function($scope, $interval ,$location, 
         }
         };
 
-        $http.post('http://localhost:8000/chat/game/send',
+        $http.post(HOST+'chat/game/send',
             {text:$scope.msg},
             config
         )

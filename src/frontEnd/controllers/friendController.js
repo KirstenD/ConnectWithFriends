@@ -6,7 +6,7 @@ friendApp.controller("friendController",function($scope, $cookieStore,$interval 
     $interval(function(){
 
     $scope.xmlhttp=new XMLHttpRequest();
-    $scope.xmlhttp.open("GET","http://localhost:8000/friends/index",false);//syncronous
+    $scope.xmlhttp.open("GET",HOST+"friends/index",false);//syncronous
     $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
     $scope.xmlhttp.send();
     if ($scope.xmlhttp.status == 200){
@@ -20,7 +20,7 @@ friendApp.controller("friendController",function($scope, $cookieStore,$interval 
 
     $scope.deleteFriend =function(id1){
     $scope.xmlhttp=new XMLHttpRequest();
-    $scope.xmlhttp.open("DELETE","http://localhost:8000/friends/delete",false);//syncronous
+    $scope.xmlhttp.open("DELETE",HOST+"friends/delete",false);//syncronous
     $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
     $scope.xmlhttp.send("id=id1");
     if ($scope.xmlhttp.status == 200){

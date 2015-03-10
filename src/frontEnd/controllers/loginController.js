@@ -8,7 +8,7 @@
             var username =$scope.userL.uname;
             var password = $scope.userL.pass;
             var res = $http({
-                url: 'http://localhost:8000/accounts/login',
+                url: HOST+'accounts/login',
                 method: 'POST',
                 data: "username=" + username + "&password=" + password,
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -33,7 +33,7 @@
                 var username = $scope.userR.uname;
                 var password = $scope.userR.pass1;
                 var res = $http({
-                    url: 'http://localhost:8000/accounts/create',
+                    url: HOST+'accounts/create',
                     method: 'POST',
                     data: "username=" + username + "&password=" + password,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
@@ -59,7 +59,7 @@
                  'Authorization': 'Token '+token,
              }
              };
-             $http.post('http://localhost:8000/games/forfeit',
+             $http.post(HOST+'games/forfeit',
                      null,
                      config
                      )

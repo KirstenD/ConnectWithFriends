@@ -13,7 +13,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         }
         };
 
-        $http.get('http://localhost:8000/chat/index' , config)
+        $http.get(HOST+'chat/index' , config)
         .success(function(data, status, headers, config) {
             $scope.global_msgs = data;
             //alert(angular.toJson(data));
@@ -22,7 +22,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         .error(function(data, status, headers, config) {
             //[-]alert(data.detail);
         });
-        $http.get("http://localhost:8000/accounts/index",config).success(function(data,status,headers,config){
+        $http.get(HOST + "accounts/index",config).success(function(data,status,headers,config){
             $scope.name = data;
            })
            .error(function(data,status,header,config){
@@ -34,7 +34,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
      $scope.addFriend = function(id1){
 
         $scope.xmlhttp=new XMLHttpRequest();
-        $scope.xmlhttp.open("POST","http://localhost:8000/friends/index",false);//syncronous
+        $scope.xmlhttp.open("POST",HOST+"friends/index",false);//syncronous
         $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
         $scope.xmlhttp.send("id=id1");
         if ($scope.xmlhttp.status == 200){
@@ -63,7 +63,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         }
         };
 
-        $http.post('http://localhost:8000/chat/send',
+        $http.post(HOST+'chat/send',
             {text:$scope.msg},
             config
         )
