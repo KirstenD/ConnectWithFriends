@@ -42,7 +42,6 @@ def game_message_list(request):
     if not game:
         return Response({"detail": "You are not in a game."}, 400)
     game_messages = GameMessage.objects.filter(game=game)
-    game_messages = GameMessage.objects.all()
     serializer = GameMessageSerializer(game_messages, many=True)
     return Response(serializer.data)
 
