@@ -35,7 +35,7 @@ mainApp.controller("mainController",function($scope, $window, $cookieStore, $htt
      document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
 
     $scope.xmlhttp=new XMLHttpRequest();
-    $scope.xmlhttp.open("GET","http://localhost:8000/accounts/whoami",false);
+    $scope.xmlhttp.open("GET",HOST+"accounts/whoami",false);
     $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
     $scope.xmlhttp.send();
     if ($scope.xmlhttp.status == 200){

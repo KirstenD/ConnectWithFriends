@@ -1,18 +1,3 @@
-//global variables
-var bgW = 7;
-var bgH = bgW/1.163;
-var circleR = bgH/(2*6.0);
-var boundaryX = bgW;
-var boundaryY = bgH;
-var error = circleR * 0.75;
-
-//for col
-var colUnit = bgW / 7.0;
-var colCenterCoords = [0-colUnit*3, 0-colUnit*2, 0-colUnit*1, 0, colUnit*1, colUnit*2, colUnit*3];
-
-//for row
-var rowUnit = bgH / 6.0;
-var rowCenterCoords = [0+rowUnit*2.5, 0+rowUnit*1.5, 0+rowUnit*0.5, 0-rowUnit*0.5, 0-rowUnit*1.5,0-rowUnit*2.5];
 
 //get the cookie according to name http://www.w3schools.com/js/js_cookies.asp
 function getCookie(cname) {
@@ -33,7 +18,7 @@ function getCookie(cname) {
 function whoami(){
     var token = getCookie("token");
     xmlhttp=new XMLHttpRequest();
-    xmlhttp.open("GET","http://localhost:8000/accounts/whoami",false);//syncronous
+    xmlhttp.open("GET",HOST+"accounts/whoami",false);//syncronous
     xmlhttp.setRequestHeader("Authorization","Token "+token);
     xmlhttp.send();
     if (xmlhttp.status == 200){
@@ -90,7 +75,7 @@ function getGameStatus(){
     //alert(token);
     xmlhttp=new XMLHttpRequest();
     //xmlhttp.open("POST","http://localhost:8000/games/detail",true);
-    xmlhttp.open("GET","http://localhost:8000/games/detail",false);//syncronous
+    xmlhttp.open("GET",HOST+"games/detail",false);//syncronous
     xmlhttp.setRequestHeader("Authorization","Token "+token);
     xmlhttp.send();
     if (xmlhttp.status == 200){
@@ -157,7 +142,7 @@ function onDocumentMouseClick( event ) {
         //post the move
         var token = getCookie("token");
         xmlhttp=new XMLHttpRequest();
-        xmlhttp.open("POST","http://localhost:8000/games/move/"+index[1],false);
+        xmlhttp.open("POST",HOST+"games/move/"+index[1],false);
         //xmlhttp.open("GET","http://localhost:8000/games/detail",false);//syncronous
         xmlhttp.setRequestHeader("Authorization","Token "+token);
         xmlhttp.send();

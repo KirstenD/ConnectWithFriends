@@ -14,7 +14,7 @@ gameApp.controller('gameController', function($scope, $interval ,$location, $win
              'Authorization': 'Token '+token,
          }
          };
-         $http.post('http://localhost:8000/games/forfeit',
+         $http.post(HOST+'games/forfeit',
              null,
              config
              )
@@ -25,7 +25,7 @@ gameApp.controller('gameController', function($scope, $interval ,$location, $win
          .error(function(data, status, headers, config) {
              console.log("error in stating or joining a game:" + status);
          });
-         $http.post('http://localhost:8000/games/start',
+         $http.post(HOST+'games/start',
              null,
              config
              )
