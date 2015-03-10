@@ -1,11 +1,10 @@
-
+'use strict'
 var chatApp = angular.module('chatApp', ['ngCookies','luegg.directives']);
 
 chatApp.controller('chatController', function($scope, $interval ,$location, $window, $cookieStore, $http) {
     $scope.global_msgs=[];
     $scope.friends =[];
-  // $scope.names=[{"id":1,"username":"brent"},{"id":2,"username":"matt"},{"id":3,"username":"kevin"}];
-
+  // $scope.names=[{}];
     $interval(function(){
         var token = $cookieStore.get("token");
         var config = {headers: {
@@ -14,20 +13,26 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         };
 
         $http.get(HOST+'chat/index' , config)
-        .success(function(data, status, headers, config) {
-            $scope.global_msgs = data;
-            //alert(angular.toJson(data));
-            //alert('message received successfully!');
+            .success(function(data, status, headers, config) {
+                $scope.global_msgs = data;
+                //alert(angular.toJson(data));
+                //alert('message received successfully!');
         })
         .error(function(data, status, headers, config) {
             //[-]alert(data.detail);
         });
-        $http.get(HOST + "accounts/index",config).success(function(data,status,headers,config){
-            $scope.name = data;
-           })
-           .error(function(data,status,header,config){
-            //alert(data.detail);
-           });
+       $scope.xmlhttp=new XMLHttpRequest();
+        $scope.xmlhttp.open("GET",HOST+"accounts/index",false);//syncronous
+        $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
+        $scope.xmlhttp.send();
+        if ($scope.xmlhttp.status == 200){
+             $scope.names  = JSON.parse($scope.xmlhttp.responseText);
+            //alert(names[0].id);
+
+
+        }else{
+            alert("exception in index:" + $scope.xmlhttp.responseText)
+        }
 
     },2000);
 
@@ -38,7 +43,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
         $scope.xmlhttp.setRequestHeader("Authorization","Token "+ $cookieStore.get("token"));
         $scope.xmlhttp.send("id=id1");
         if ($scope.xmlhttp.status == 200){
-             $scope.names  = JSON.parse($scope.xmlhttp.responseText);
+             $scope.friends  = JSON.parse($scope.xmlhttp.responseText);
             //alert(names[0].id);
 
 
