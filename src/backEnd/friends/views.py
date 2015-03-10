@@ -61,4 +61,6 @@ def delete(request):
         Follower.objects.get(follower=user, followed=friend).delete()
     except ObjectDoesNotExist:
         return Response({"detail": "Specified user is not your friend."}, 400)
-    return Response({}, 204)
+    friends = [f.followed for f in Follower.objects.filter(follower=user)]
+    serializer = UserSerializer(friends, many=True)
+    return Response(serializer.data)
