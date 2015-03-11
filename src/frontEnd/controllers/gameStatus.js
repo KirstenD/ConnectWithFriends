@@ -1,13 +1,12 @@
-//put status updates in a separate file
-
-function updateStatus(stalemate,turn,winner){
-    updateStatusHelper("turn",turn);
-    updateStatusHelper("stalemate",stalemate);
-    updateStatusHelper("winner",winner);
+//put status updates in a separate file, player2 is to check if the second player has joined
+function updateStatus(stalemate,turn,winner,player2){
+    updateStatusHelper("turn",turn,player2);
+    updateStatusHelper("stalemate",stalemate,player2);
+    updateStatusHelper("winner",winner,player2);
 
 }
 
-function updateStatusHelper(name,arg){
+function updateStatusHelper(name,arg,player2){
     if (typeof(scene.getObjectByName(name)) != "undefined"){
         scene.remove((scene.getObjectByName(name)));
     }
@@ -16,7 +15,7 @@ function updateStatusHelper(name,arg){
     var g = bitmap.getContext('2d');
     bitmap.width = 100;
     bitmap.height = 100;
-    g.font = 'Bold 15 Arial';
+    g.font = 'Bold 20 Arial';
 
     var text;
     var xpos = 0;
@@ -29,19 +28,25 @@ function updateStatusHelper(name,arg){
             g.fillStyle = 'yellow';
         }else{
             text = "Wait";
-            g.strokeStyle = 'red';
+            g.fillStyle = 'red';
         }
         xpos = bgW/2.0 + bgW/5.0;
         ypos = bgH/2.0 - bgH/4.0;
     }else if (name == "stalemate"){
         var sm = arg;
         console.log(sm);
-        if (sm == false){
-            text = "On going"
+        console.log(player2);
+        if (sm == false && player2 == null){
+            text = "Queuing.."
+            //g.strokeStyle = 'red';
+            g.fillStyle = 'red';
+        }else if (sm == false){
+            text = "In game"
             g.fillStyle = 'yellow';
         }else{
             text = "Draw!"
-            g.strokeStyle = 'red';
+            g.fillStyle = 'red';
+            //g.strokeStyle = 'red';
         }
         xpos = bgW/2.0 + bgW/5.0;
         ypos = -bgH/2.0 + bgH/4.0;
@@ -56,7 +61,8 @@ function updateStatusHelper(name,arg){
             scene.remove((scene.getObjectByName("stalemate")));
         }else{
             text = "You lose!"
-            g.strokeStyle = 'red';
+            g.fillStyle = 'red';
+            //g.strokeStyle = 'red';
             scene.remove((scene.getObjectByName("stalemate")));
         }
         xpos = bgW/2.0 + bgW/5.0;
