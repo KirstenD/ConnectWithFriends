@@ -45,15 +45,13 @@ def add(request):
 
 
 @api_view(["DELETE"])
-@permission_classes((IsAuthenticated, ))
-def delete(request):
+#@permission_classes((IsAuthenticated, ))
+def delete(request, user_id):
     """
     Remove a friend from you friends list.
     """
-    if "id" not in request.data:
-        return Response({"detail": "Must provide id."}, 400)
     try:
-        friend = User.objects.get(pk=request.data["id"])
+        friend = User.objects.get(pk=user_id)
     except ObjectDoesNotExist:
         return Response({"detail": "Invalid user id."}, 400)
     user = request.user

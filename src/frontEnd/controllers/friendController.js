@@ -21,7 +21,6 @@ friendApp.controller("friendController",function($scope, $interval ,$location, $
     }
 
     $scope.deleteFriend =function(ids){
-        alert(ids);
         /*
          $scope.xmlhttp=new XMLHttpRequest();
         $scope.xmlhttp.open("DELETE",HOST+"friends/delete",false);//syncronous
@@ -40,10 +39,7 @@ friendApp.controller("friendController",function($scope, $interval ,$location, $
              'Authorization': 'Token '+token,
          }
          };
-       $http.delete(HOST+'friends/delete',
-            {"id": ids},config
-
-             )
+       $http.delete(HOST+'friends/delete/' + ids, config)
              .success(function( status, headers, config) {
                  console.log('friend Added successfully!');
                  //alert(data.turn);
