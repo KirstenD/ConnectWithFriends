@@ -56,12 +56,12 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
              console.log("error in addding friend:" + status);
          });
          };
-    $scope.chat = function(name){
-        alert("chat "+name);
-    };
-    $scope.challenge = function(name){
-        alert("challenge "+name);
-    };
+    //$scope.chat = function(name){
+    //    alert("chat "+name);
+    //};
+    //$scope.challenge = function(name){
+    //    alert("challenge "+name);
+    //};
     $scope.send = function(){
         var token = $cookieStore.get("token");
         //alert($scope.msg+token);
@@ -87,10 +87,29 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
      $scope.chat = function(){
         //alert("chating is fun");
         //alert($cookieStore.get("token"));
-        document.getElementById("iframe").width="1000"
-        document.getElementById("iframe2").width = "200";
-       document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
-       document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
+
+         var token = $cookieStore.get("token");
+         //alert(token);
+         var config = {headers: {
+             'Authorization': 'Token '+token,
+         }
+         };
+         $http.post(HOST+'games/forfeit',
+             null,
+             config
+             )
+             .success(function(data, status, headers, config) {
+                 console.log('message sent successfully!');
+                 //alert(data.turn);
+             })
+         .error(function(data, status, headers, config) {
+             console.log("error in forfeiting a game:" + status);
+         });
+
+         document.getElementById("iframe").width="1000";
+         document.getElementById("iframe2").width = "200";
+         document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
+         document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
     };
 });
 

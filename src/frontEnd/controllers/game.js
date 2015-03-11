@@ -84,7 +84,8 @@ function getGameStatus(){
         //game.board[4][0] = 1;
         //game.board[0][5] = 2;
         updateBoard(game.board,game.player1) ;
-        updateStatus(game.stalemate,game.turn,game.winner);
+        console.log("here"+game.player2);
+        updateStatus(game.stalemate,game.turn,game.winner,game.player2);
         if (game.winner != null){//TODO: may or may not need it
             //alert(game.winner);
         }
@@ -216,4 +217,4 @@ var render = function () {
 };
 render();
 getGameStatus();
-setInterval(getGameStatus, 2000);
+setInterval(getGameStatus, 1200);
