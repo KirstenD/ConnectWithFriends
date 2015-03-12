@@ -106,10 +106,30 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
              console.log("error in forfeiting a game:" + status);
          });
 
-         document.getElementById("iframe").width="1000";
-         document.getElementById("iframe2").width = "200";
-         document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
-         document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
+         //delete then append, so the history will not be recorded
+         var ifr = document.getElementById("iframe");
+         ifr.parentNode.removeChild(ifr);
+         var ifr2 = document.getElementById("iframe2");
+         ifr2.parentNode.removeChild(ifr2);
+
+         ifr = document.createElement('iframe');
+         ifr.width = "1000";
+         ifr.height = "500";
+         ifr.id = "iframe";
+         ifr.class = "iframe1";
+         ifr.src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";;
+         ifr2 = document.createElement('iframe');
+         ifr2.width = "200";
+         ifr2.height = "500";
+         ifr2.id = "iframe2";
+         ifr2.src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
+         document.body.appendChild(ifr);
+         document.body.appendChild(ifr2);
+
+         //document.getElementById("iframe").width="1000";
+         //document.getElementById("iframe2").width = "200";
+         //document.getElementById("iframe").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"chat.html";
+         //document.getElementById("iframe2").src = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"friend.html";
     };
 });
 
