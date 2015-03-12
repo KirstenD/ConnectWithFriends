@@ -49,7 +49,7 @@ chatApp.controller('gameChatController', function($scope, $interval ,$location, 
             //alert('message sent successfully!');
         })
         .error(function(data, status, headers, config) {
-            alert(data);
+            console.log(data);
         });
 
         $scope.msg = null;  //clear the input form

@@ -17,7 +17,7 @@ friendApp.controller("friendController",function($scope, $interval ,$location, $
 
 
     }else{
-        alert("exception in index:" + $scope.xmlhttp.responseText);
+       console.log("exception in index:" + $scope.xmlhttp.responseText);
     }
 
     $scope.deleteFriend =function(ids){

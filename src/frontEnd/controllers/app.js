@@ -44,7 +44,7 @@ mainApp.controller("mainController",function($scope, $window, $cookieStore, $htt
 
 
     }else{
-        alert("exception in whoami:" + $scope.xmlhttp.responseText)
+        console.log("exception in whoami:" + $scope.xmlhttp.responseText)
     }
 
 

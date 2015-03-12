@@ -27,7 +27,7 @@ function whoami(){
         return user.id;
         
     }else{
-        alert("exception in whoami:" + xmlhttp.responseText)
+        console.log("exception in whoami:" + xmlhttp.responseText)
     }
 }
 
@@ -86,6 +86,7 @@ function getGameStatus(){
         updateBoard(game.board,game.player1) ;
         console.log("here"+game.player2);
         updateStatus(game.stalemate,game.turn,game.winner,game.player2);
+        updateOpponent(game.player1, game.player2);
         if (game.winner != null){//TODO: may or may not need it
             //alert(game.winner);
         }

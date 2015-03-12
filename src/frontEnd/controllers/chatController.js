@@ -31,7 +31,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
 
 
         }else{
-            alert("exception in index:" + $scope.xmlhttp.responseText)
+            console.log("exception in index:" + $scope.xmlhttp.responseText)
         }
 
     },2000);
@@ -79,7 +79,7 @@ chatApp.controller('chatController', function($scope, $interval ,$location, $win
             //alert('message sent successfully!');
         })
         .error(function(data, status, headers, config) {
-            alert(data.detail);
+           console.log(data.detail);
         });
 
         $scope.msg = null;  //clear the input form
