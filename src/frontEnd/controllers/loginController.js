@@ -20,7 +20,8 @@
                 $window.location.href = document.URL.substr(0,document.URL.lastIndexOf('/')+1)+"html/main.html";
             })
             .error(function(data, status, headers, config) {
-                alert( "login fail: " + data);
+                alert( "login fail: make sure you have the Internet connection and input correct user info" );
+                //alert( "login fail: " + data);
             });
         }
 
