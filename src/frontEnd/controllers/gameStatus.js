@@ -147,7 +147,7 @@ function updateOpponent(player1,player2){
             xpos = -bgW/2.0 - bgW/5.0;
             ypos = bgH/2.0 - bgH/4.0;
             //ypos = 0;
-            var stat = new THREEx.Text(text, 0x0000ff);
+            var stat = new THREEx.Text(text, 0xffff00);
             stat.name = name;
             stat.position.x = xpos;
             stat.position.y = ypos;
