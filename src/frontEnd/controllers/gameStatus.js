@@ -34,7 +34,7 @@ function updateStatusHelper(name,arg,player2){
             //g.fillStyle = 'red';
             color = 0xff0000;
         }
-        xpos = bgW/2.0 + bgW/5.0;
+        xpos = bgW/2.0 + bgW/6.5;
         ypos = bgH/2.0 - bgH/4.0;
     }else if (name == "stalemate"){
         var sm = arg;
@@ -55,7 +55,7 @@ function updateStatusHelper(name,arg,player2){
             color = 0xff0000;
             //g.strokeStyle = 'red';
         }
-        xpos = bgW/2.0 + bgW/5.0;
+        xpos = bgW/2.0 + bgW/6.0;
         ypos = -bgH/2.0 + bgH/4.0;
     }else if (name == "winner"){
         var winner = arg;

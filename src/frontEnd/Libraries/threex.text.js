@@ -5,7 +5,7 @@ THREEx.Text	= function(text, c, options){
 	options	= options || {
 		font		: "droid serif",
 		weight		: "normal",
-		size		: 0.3,
+		size		: 0.25,
 		height		: 0.4,
 	}
 
