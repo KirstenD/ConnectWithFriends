@@ -17,34 +17,41 @@
         <script src="../controllers/host.js"></script>
 
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0rc1/angular-route.min.js"></script>
+    <script>  function tip(){
+
+    alert("Tips: 1.To play a game: press 'New Game' button. 2. When a game finishes (e.g. win, lose or draw), you can press 'New Game' button again to start a new game. 3. Pressing any of the three buttons during a game will forfeit the game! 4. There is no way back after using 'back' on your browser during a game!! ");
+
+  } </script>
     </head>
     <body ng-app="mainApp">
-        <table>
-            <td class = "tablerow" ng-controller="mainController">
 
-
+            <div class = "tablerow" ng-controller="mainController">
+                <img height = "100px" src="../images/Main_Screen_Logo.png">
                  Welcome to Connect With Friends, {{user.username}}
-                 <br>Tips: 1.to play a game: press "Play a game button". 2. when a game finishes (e.g. win, lose or draw), you can press "Play a game" button again to start a new game. 3. pressing any of the three buttons during a game will forfeit the game! 4. there is no way back after using "back" on your browser during a game!! 
 
-            </td>
-            <td >
-                 <div  ng-controller="loginController">
+            </div>
+              <div>
+                  <iframe class="iframe1" id= "iframe"  width="80%" height="100%"></iframe>
+
+              </div>
+
+
+                 <div  style="padding-left:83%;" ng-controller="loginController">
 
                         <button class=" buttons" ng-click='logout()' >Logout</button>
                 </div>
 
-                <div ng-controller="gameController">
-                        <button class=" buttons" ng-click='game()'> Play a Game </button>
+                <div style="padding-left:83%;">
+                        <button class=" buttons" onclick='tip()'> Tips </button>
                 </div>
 
-                <div ng-controller = "chatController" >
-                        <button class=" buttons"  ng-click='chat()'> Want to Chat </button>
+                <div style="padding-left:83%;" ng-controller = "gameController" >
+                        <button class=" buttons"  ng-click='game()'> New Game </button>
                 </div>
-            </td>
-        </table>
-
-
-            <iframe class="iframe1" id= "iframe"  width="80%" height="100%"></iframe>
+                <div  style="padding-left:83%;" ng-controller = "chatController" >
+                        <button class=" buttons"  ng-click='chat()'> Chat </button>
+                </div>
+                <br>
 
             <iframe class="iframe2" id="iframe2"  width="20%" height="100%" ></iframe>
 

@@ -1,7 +1,7 @@
 
 body{
     margin:0;
-    padding:10;
+    padding:3%;
     width:100%;
     background-color: #e8e8e8;
 }
@@ -12,22 +12,25 @@ body{
         *zoom:1;
         vertical-align: top;
 }
-div {
-    padding-left: 80%;
-    background-color: #e8e8e8;
-}
+
 .tablerow{
-    width: 1000px
+    width: 60%
+
+}
+.tablerow2{
+   width: 10%
+
 }
 
 .buttons{
-    width:100px;height:25px;
+    width:50%;height:5%;
+
 
 }
 
 .iframe1{
      float:left;
-     width=90%;
+     width=80%;
 }
 .iframe2{
      float:left;
