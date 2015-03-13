@@ -28,7 +28,7 @@ body    { padding-top:20px; background-color: #e8e8e8;}
         <div class="page-header"><h1>Welcome to </h1>
         <image src="images/Main_Logo.png" width="750" height="200"></image>
         <!-- form for login -->
-        <form name="loginForm" ng-submit="submitLogin()" novalidate>
+        <form name="loginForm" ng-submit="submitLogin()" >
 
             <!-- login username -->
             <div class="form-group">
@@ -49,24 +49,24 @@ body    { padding-top:20px; background-color: #e8e8e8;}
         <br>
 
         <!-- form for register -->
-        <form name="regForm" ng-submit="submitReg()" novalidate>
+        <form name="regForm" ng-submit="submitReg()" >
 
             <!-- register username -->
             <div class="form-group">
                 <label>New username</label>
-                <input type="text" name="unameR" class="form-control" placeholder="username" ng-model="userR.uname">
+                <input type="text" name="unameR" class="form-control" placeholder="username" ng-model="userR.uname" required>
             </div>
 
             <!-- register password -->
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="passR1" class="form-control" placeholder="password" ng-model="userR.pass1">
+                <input type="password" name="passR1" class="form-control" placeholder="password" ng-model="userR.pass1" required>
             </div>
 
             <!-- register password -->
             <div class="form-group">
                 <label>Confirm password </label>
-                <input type="password" name="passR2" class="form-control" placeholder="password" ng-model="userR.pass2">
+                <input type="password" name="passR2" class="form-control" placeholder="password" ng-model="userR.pass2" required>
             </div>
 
             <!-- register submit button -->
